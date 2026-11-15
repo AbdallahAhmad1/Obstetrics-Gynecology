@@ -1,0 +1,2593 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<title>Obstetrics & Gynecology 🤰 | The Coding Nurse (𝒜ℳℋ)🩺💉</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root[data-theme="light"] {
+  --primary: #0f4c81;
+  --secondary: #0ea5e9;
+  --success: #22c55e;
+  --danger: #dc2626;
+  --bg: #f1f5f9;
+  --card-bg: #ffffff;
+  --soft: #f8fafc;
+  --text: #0f172a;
+  --border: #e5e7eb;
+  --shadow: rgba(0,0,0,.06);
+}
+:root[data-theme="dark"] {
+  --primary: #38bdf8;
+  --secondary: #0ea5e9;
+  --success: #4ade80;
+  --danger: #f87171;
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --soft: #0f172a;
+  --text: #f8fafc;
+  --border: #334155;
+  --shadow: rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box; font-family:"Segoe UI", system-ui, sans-serif; transition: background 0.3s, color 0.3s;}
+body{margin:0; background:var(--bg); color:var(--text)}
+.container{max-width:1000px; margin:auto; padding:16px; position: relative;}
+
+.top-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: -36px;
+  margin-bottom: 26px;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+.settings-bar {
+  display: flex;
+  gap: 6px;
+}
+
+.setting-btn, .theme-toggle {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--text);
+  box-shadow: 0 4px 12px var(--shadow);
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+.shake-anim { animation: shake 0.3s ease-in-out; }
+
+.hero{
+  text-align:center;
+  padding:40px 20px 50px 20px;
+  border-radius:24px;
+  background: linear-gradient(135deg, #0f4c81, #0ea5e9);
+  color:#fff;
+  margin-bottom: 20px;
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 10px 25px rgba(15, 76, 129, 0.2);
+}
+.hero h1{margin:0; font-size:32px; font-weight:800}
+.hero h2{ margin-top:6px; font-size:18px; letter-spacing:2px; text-transform:uppercase; color:#bbf7d0;}
+
+.mid-nav{ display:flex; gap:10px; margin:24px 0; padding:6px 4px; overflow-x:auto;}
+.q-btn{
+  min-width:44px; padding:10px 0; border-radius:12px; border:2px solid var(--border);
+  background:var(--card-bg); color: var(--text); font-weight:700; cursor:pointer; transition: all 0.2s ease;
+}
+.q-btn.active{background:#dbeafe; border-color:var(--secondary); color:#0f4c81; transform: scale(1.1); box-shadow: 0 4px 10px rgba(14, 165, 233, 0.2);}
+.q-btn.correct{background:#dcfce7 !important; border-color:var(--success) !important; color: #16a34a !important;}
+.q-btn.wrong{background:#fee2e2 !important; border-color:var(--danger) !important; color: #dc2626 !important;}
+.q-btn.flagged{border-color: #f59e0b !important; background: #fef3c7 !important; color: #b45309 !important;}
+.q-btn.answered-exam { background: #e2e8f0; border-color: #94a3b8; color: #475569; }
+
+.card{
+  background:var(--card-bg); border-radius:22px; padding:28px;
+  box-shadow:0 14px 35px var(--shadow); text-align: center;
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid var(--border);
+}
+
+.salawat-wrapper {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+.salawat-card-badge {
+  background: linear-gradient(135deg, rgba(15, 76, 129, 0.08), rgba(14, 165, 233, 0.08));
+  border: 2px dashed var(--primary);
+  color: var(--text);
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px var(--shadow);
+  animation: pulseGlow 2.5s infinite alternate;
+  direction: rtl;
+}
+@keyframes pulseGlow {
+  0% { transform: scale(1); box-shadow: 0 4px 15px var(--shadow); }
+  100% { transform: scale(1.03); box-shadow: 0 6px 22px rgba(14, 165, 233, 0.25); }
+}
+:root[data-theme="dark"] .salawat-card-badge {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(14, 165, 233, 0.12));
+}
+
+.main-mode-view {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  margin: 20px 0;
+}
+.main-choice-btn {
+  width: 100%;
+  max-width: 450px;
+  padding: 18px 24px;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  direction: rtl;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 16px var(--shadow);
+  border: 2px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+}
+.main-choice-btn:hover {
+  transform: translateY(-3px);
+}
+.main-choice-btn.lectures-trigger {
+  border-left: 6px solid var(--primary);
+}
+.main-choice-btn.lectures-trigger:hover {
+  border-color: var(--secondary);
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.2);
+}
+.main-choice-btn.exam-trigger {
+  border-left: 6px solid #f59e0b;
+}
+.main-choice-btn.exam-trigger:hover {
+  border-color: #f59e0b;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25);
+}
+
+.dataset-selector {
+ margin: 0 0 18px 0;
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+ align-items: center;
+}
+.dataset-title {
+ font-size: 15px;
+ font-weight: 800;
+ color: var(--primary);
+ direction: rtl;
+}
+
+.custom-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  max-width: 450px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  font-size: 15px;
+  background: var(--soft) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2364748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>') no-repeat;
+  background-position: left 16px center;
+  color: var(--text);
+  font-weight: 700;
+  direction: ltr;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+.custom-select:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+  background-color: var(--card-bg);
+}
+.custom-select option {
+  font-weight: bold;
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+.mode-selector {
+ margin: 20px 0 25px 0;
+ display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+.mode-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--soft);
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  width: 100%;
+  max-width: 450px;
+  text-align: right;
+  direction: rtl;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.mode-option input { scale: 1.3; cursor: pointer; margin-left: 10px; }
+.mode-option:hover { border-color: var(--secondary); }
+.mode-option:has(input:checked) {
+  border-color: var(--secondary);
+  background: rgba(14, 165, 233, 0.08);
+}
+
+.start-btn {
+  padding: 16px 50px; font-size: 18px; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, var(--success), #16a34a); border: none; border-radius: 16px;
+  cursor: pointer; transition: all 0.2s ease; width: 100%; max-width: 450px;
+  display: block; margin: 10px auto;
+}
+.start-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(34, 197, 94, 0.35); }
+
+.back-btn {
+  padding: 12px 30px; font-size: 15px; font-weight: 700; color: var(--text);
+  background: var(--soft); border: 2px solid var(--border); border-radius: 14px;
+  cursor: pointer; transition: all 0.2s; width: 100%; max-width: 450px;
+  display: block; margin: 12px auto;
+}
+.back-btn:hover { background: var(--border); transform: translateY(-1px); }
+
+.resume-btn {
+  padding: 14px 30px; font-size: 16px; font-weight: 700; color: var(--primary);
+  background: transparent; border: 2px solid var(--primary); border-radius: 16px;
+  cursor: pointer; transition: all 0.2s ease; display: none; width: 100%; max-width: 450px;
+  display: block; margin: 12px auto;
+}
+.resume-btn:hover { background: var(--primary); color: #fff; }
+
+.timer-box {
+  display: none;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-weight: 800;
+  color: var(--danger);
+  box-shadow: 0 4px 12px var(--shadow);
+  text-align: center;
+  margin: 10px auto 20px auto;
+  width: fit-content;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.progress{ height:10px; background:var(--border); border-radius:999px; overflow:hidden; margin-bottom:18px;}
+.progress span{
+  display:block; height:100%; width:0%;
+  background:linear-gradient(90deg, var(--secondary), var(--success));
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.question-box{
+  background: var(--soft);
+  border-left:6px solid var(--secondary); border-radius:18px; padding:22px; text-align: left;
+}
+
+.q-tools-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--border);
+}
+.q-badge {
+  background: var(--primary);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: bold;
+}
+.q-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.question { font-size:19px; font-weight:600; line-height: 1.5; width: 100%; display: block; word-wrap: break-word; }
+
+.kw-highlight {
+  background-color: #fef08a;
+  color: #854d0e;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-color: #ca8a04;
+  text-decoration-thickness: 3px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+:root[data-theme="dark"] .kw-highlight {
+  background-color: #713f12;
+  color: #fef08a;
+  text-decoration-color: #eab308;
+}
+
+#speakBtn, #stopSpeakBtn, #translateBtn { background: none; border: none; font-size: 20px; cursor: pointer; padding: 0; line-height: 1; transition: transform 0.2s; }
+#speakBtn:hover, #stopSpeakBtn:hover, #translateBtn:hover { transform: scale(1.2); }
+
+#flagBtn { background: none; border: none; font-size: 22px; cursor: pointer; padding: 0; line-height: 1; transition: transform 0.2s; filter: grayscale(1); }
+#flagBtn:hover { transform: scale(1.2); }
+#flagBtn.active { filter: grayscale(0) drop-shadow(0 0 4px #f59e0b) !important; transform: scale(1.1); }
+
+.translation-box {
+  display: none;
+  margin-top: 18px;
+  padding: 16px;
+  background: var(--card-bg);
+  border-right: 4px solid var(--secondary);
+  border-radius: 12px;
+  direction: rtl;
+  text-align: right;
+  box-shadow: inset 0 2px 6px var(--shadow), 0 2px 8px var(--shadow);
+  animation: popIn 0.3s ease;
+}
+.trans-title { font-weight: bold; color: var(--secondary); margin-bottom: 8px; font-size: 14px; }
+.trans-q { font-size: 16px; font-weight: 600; margin-bottom: 12px; line-height: 1.5; color: var(--text); }
+.trans-o-list { margin: 0; padding-right: 20px; font-size: 15px; color: #475569; line-height: 1.7; }
+
+.options button{
+  width:100%; padding:16px; margin-bottom:12px; border-radius:14px;
+  border:2px solid var(--border); background:var(--card-bg); color: var(--text);
+  font-size:16px; text-align: left; cursor:pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.options button:not(:disabled):hover {
+  transform: translateY(-2px); border-color: var(--secondary);
+  box-shadow: 0 6px 16px rgba(14, 165, 233, 0.15);
+}
+.options button.correct{background:#ecfdf5 !important; border-color:var(--success) !important; color: #065f46 !important; font-weight: 700;}
+.options button.wrong{background:#fef2f2 !important; border-color:var(--danger) !important; color: #991b1b !important; font-weight: 700;}
+.options button.selected-exam { background: #e0f2fe !important; border-color: var(--secondary) !important; color: #0369a1 !important; font-weight: 700; }
+
+.nav{ display:flex; gap:12px; margin-top:26px;}
+.nav button{
+  flex:1; padding:14px; border-radius:14px; font-size:15px; font-weight:700; cursor:pointer; transition: all 0.2s;
+}
+.prev{background:var(--card-bg); border:2px solid var(--border); color: var(--text);}
+.prev:hover{background: var(--soft); transform: translateY(-1px);}
+.next{ border:none; color:#fff; background:linear-gradient(135deg,var(--primary),var(--secondary));}
+.next:hover{opacity: 0.95; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(15, 76, 129, 0.2);}
+
+.extra-nav { display: flex; gap: 12px; margin-top: 12px; }
+.extra-nav button { flex: 1; padding: 12px; border-radius: 14px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+.home-btn { background: var(--card-bg); border: 2px solid var(--border); color: var(--text); }
+.home-btn:hover { background: var(--soft); transform: translateY(-1px); }
+.finish-btn { background: linear-gradient(135deg, var(--danger), #b91c1c); border: none; color: #fff; }
+.finish-btn:hover { opacity: 0.95; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2); }
+
+.result-msg { font-size: 18px; margin-bottom: 10px; line-height: 1.6; }
+.duck-msg { display: block; margin-top: 15px; font-weight: 800; color: var(--primary); font-size: 20px;}
+.stats-container {
+  display: flex; justify-content: space-around; background: var(--soft);
+  padding: 16px; border-radius: 16px; margin: 20px 0; border: 1px solid var(--border);
+}
+.stat-box { text-align: center; }
+.stat-val { font-size: 24px; font-weight: 800; }
+.stat-lbl { font-size: 13px; color: #64748b; margin-top: 4px; }
+.score{ font-size:48px; font-weight:900; color:var(--success); margin: 10px 0; text-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);}
+.badge-title { font-size: 22px; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.result-actions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin: 20px auto 0 auto;
+}
+.restart{
+  padding:14px 28px; border:none; border-radius:16px; font-size:16px; font-weight:700;
+  cursor:pointer; color:#fff; background:linear-gradient(135deg,#0f4c81,#0ea5e9); transition: all 0.2s;
+  width: 100%;
+}
+.restart:hover{transform: translateY(-2px); box-shadow: 0 6px 18px rgba(15, 76, 129, 0.35);}
+
+.review-btn {
+  padding: 14px 28px; border: 2px solid var(--success); border-radius: 16px; font-size: 16px; font-weight: 700;
+  cursor: pointer; color: var(--success); background: transparent; transition: all 0.2s;
+  width: 100%; display: none;
+}
+.review-btn:hover { background: var(--success); color: #fff; transform: translateY(-2px); }
+
+.download-btn {
+  padding: 14px 28px; border: 2px solid var(--primary); border-radius: 16px; font-size: 16px; font-weight: 700;
+  cursor: pointer; color: var(--primary); background: transparent; transition: all 0.2s;
+  width: 100%;
+}
+.download-btn:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="hero">
+        <h1>Obstetrics & Gynecology 🤰</h1>
+        <h2>Question app</h2>
+        <p>Prepared by <strong>The Coding Nurse (𝒜ℳℋ)🩺💉</strong></p>
+    </div>
+
+    <div class="top-bar">
+        <div class="settings-bar">
+            <button class="setting-btn" id="soundToggle" onclick="toggleSound()"><span>🔊</span> Sound On</button>
+            <button class="setting-btn" id="vibeToggle" onclick="toggleVibration()"><span>📳</span> Vibe On</button>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()"><span>🌓</span> Dark Mode</button>
+    </div>
+
+    <div class="card" id="startCard">
+        
+        <div class="salawat-wrapper">
+            <div class="salawat-card-badge">✨ صلي علي النبي 🤍🐣✨</div>
+        </div>
+        
+        <div id="mainModeMenu" class="main-mode-view">
+            <button class="main-choice-btn lectures-trigger" onclick="selectRootMode('lectures')">
+                <span>📌 📚 أسئله علي المحاضرات </span>
+                <span>⬅️</span>
+            </button>
+            <button class="main-choice-btn exam-trigger" onclick="selectRootMode('comprehensive_exam')">
+                <span>📌 🏆 وضع الامتحان الشامل </span>
+                <span>⭐</span>
+            </button>
+        </div>
+
+        <div id="lecturesSetupContainer" style="display: none;">
+            <div id="highScoreView" style="display:none; font-weight:bold; margin:0 auto 16px auto; color:var(--success); font-size:14px; background:rgba(34, 197, 94, 0.08); padding:8px 16px; border-radius:50px; border:1px dashed var(--success); width:fit-content; direction:rtl;">
+                🏆 أعلى سكور: <span id="highScoreVal">0%</span>
+            </div>
+
+            <div class="dataset-selector">
+                <div class="dataset-title">: Choose the lecture first</div>
+                <select id="datasetDrawer" class="custom-select" onchange="setDataset(this.value)">
+                    <option value="place1">1. Hypothalamo-pituitary ovarian axis</option>
+                    <option value="place2">2. Ovarian cycle</option>
+                    <option value="place3">3. Menstrual cycle</option>
+                    <option value="place4">4. Abnormal menstrual pattern</option>
+                    <option value="place5">5. Causes of abnormal uterine bleeding</option>
+                    <option value="place6">6. Pain related to menstruation</option>
+                    <option value="place7">7. Infertility</option>
+                    <option value="place8">8. Uterine fibroid</option>
+                    <option value="place9">9. Pelvic inflammatory diseases</option>
+                    <option value="place10">10. Contraception</option>
+                    <option value="place11">11. Definitions and introduction</option>
+                    <option value="place12">12. Hyperemesis gravidarum</option>
+                    <option value="place13">13. Anemia with pregnancy</option>
+                    <option value="place14">14. Diabetes mellitus with pregnancy</option>
+                    <option value="place15">15. Hypertensive disorders with pregnancy</option>
+                    <option value="place16">16. Premature rupture of membranes</option>
+                    <option value="place17">17. Bleeding in early pregnancy</option>
+                    <option value="place18">18. Antepartum hemorrhage</option>
+                    <option value="place19">19. Postpartum hemorrhage</option>
+                    <option value="place20">20. Breast problems during lactation</option>
+                    <option value="place21">21. Puerperal pyrexia</option>
+                    <option value="place22">22. Urinary tract infection during pregnancy</option>
+                </select>
+            </div>
+
+            <div class="mode-selector">
+                <label class="mode-option">
+                    <input type="radio" name="quizMode" value="sequential" onchange="setMode('sequential')">
+                    <span>🔢 وضع الترتيب (أسئلة واختيارات مرتبة بدون عشوائية)</span>
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="quizMode" value="study" checked onchange="setMode('study')">
+                    <span>📖 وضع المذاكرة (عشوائي + تصحيح فوري للمعلومات)</span>
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="quizMode" value="memorize" onchange="setMode('memorize')">
+                    <span>🧠 وضع البصمجة (كشف الإجابة الصحيحه للمراجعه)</span>
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="quizMode" value="exam" onchange="setMode('exam')">
+                    <span>⏳ وضع الامتحان (عشوائي + تايمر وبدون كشف الإجابات)</span>
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="quizMode" value="bookmark" onchange="setMode('bookmark')">
+                    <span>🔖 مراجعة الأسئلة المميزة فقط</span>
+                </label>
+            </div>
+
+            <button class="start-btn" onclick="startQuiz()">Start 🚀</button>
+            <button class="back-btn" onclick="selectRootMode('main')">⬅️ العودة للرئيسية</button>
+            <button class="resume-btn" id="resumeBtn" onclick="resumeQuiz()">استكمال محاولة الحل السابقة 🔄</button>
+        </div>
+    </div>
+
+    <div id="quizContainer" style="display:none">
+        <div class="timer-box" id="timerBox">⏳ المتبقي: <span id="timerDisplay">00:00</span></div>
+        <div class="mid-nav" id="midNav"></div>
+        <div class="card" id="quizCard">
+            <div class="progress"><span id="progressBar"></span></div>
+            <div class="question-box">
+                
+                <div class="q-tools-bar">
+                    <span class="q-badge" id="qIndexBadge">Question</span>
+                    <div class="q-actions">
+                        <button id="translateBtn" onclick="toggleTranslation()" title="ترجمة السؤال للعربية" style="display:none;">🌍</button>
+                        <button id="speakBtn" onclick="speakQuestion()" title="بدء النطق من أول وجديد">🔊</button>
+                        <button id="stopSpeakBtn" onclick="toggleSpeechPause()" title="إيقاف مؤقت" style="display:none;">⏸️</button>
+                        <button id="flagBtn" onclick="toggleFlag()" title="Bookmark Question">🔖</button>
+                    </div>
+                </div>
+
+                <div class="question" id="question"></div>
+                
+                <div class="translation-box" id="translationBox">
+                    <div class="trans-title">🎯 الترجمة العربية:</div>
+                    <div class="trans-q" id="transQText"></div>
+                    <ul class="trans-o-list" id="transOList"></ul>
+                </div>
+
+                <div class="options" id="options" style="margin-top: 20px;"></div>
+            </div>
+            
+            <div class="nav">
+                <button class="prev" onclick="prevQ()">⬅ Previous</button>
+                <button class="next" onclick="nextQ()">Next ➡</button>
+            </div>
+            
+            <div class="extra-nav">
+                <button class="home-btn" onclick="goToHome()">🏠 الرئيسية (حفظ)</button>
+                <button class="finish-btn" onclick="showResult()">📊 إنهاء وعرض النتيجة</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card result" id="resultCard" style="display:none">
+        <div class="result-msg" style="color: var(--primary); font-weight: bold;">✨🤍 صلي علي النبي ✨ </div>
+        <div class="result-msg">
+            متزعلش لو نتيجة حلك مكنتش أحسن حاجه خليك ديما فاكر ان لسه فيه فرصه تحاول سمي الله وحاول تاني
+            <span class="duck-msg">( 🐥 أشطر كتكوت يخواشي )</span>
+        </div>
+        
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="stat-val" id="statCorrect" style="color: var(--success);">0</div>
+                <div class="stat-lbl">Correct ✅</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-val" id="statWrong" style="color: var(--danger);">0</div>
+                <div class="stat-lbl">Wrong ❌</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-val" id="statRatio" style="color: var(--secondary);">0%</div>
+                <div class="stat-lbl">Accuracy 🎯</div>
+            </div>
+        </div>
+
+        <h2>Final Result</h2>
+        <div class="score" id="scoreText"></div>
+        <div class="badge-title" id="badgeTitle"></div>
+        
+        <div class="result-actions-container">
+            <button class="review-btn" id="reviewBtn" onclick="startReview()">🔁 مراجعة الأخطاء فقط</button>
+            <button class="download-btn" id="downloadBtn" onclick="downloadResultCard()">📸 تحميل النتيجة كصورة</button>
+            <button class="restart" onclick="restartQuiz()">🔄 Restart Quiz</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+const datasets = {
+  "place1": [
+    {
+      "q": "Which of the following hormones is secreted directly by the hypothalamus?",
+      "o": ["Follicle-stimulating hormone (FSH)", "Luteinizing hormone (LH)", "Gonadotropin-releasing hormone (GnRH)", "Estrogen", "Progesterone"],
+      "a": 2,
+      "trQ": "أي من الهرمونات التالية يُفرز مباشرة بواسطة منطقة تحت المهاد (الهيبوثلاموس)؟",
+      "trO": ["الهرمون المنشط للحوصلة (FSH)", "الهرمون الملوتن (LH)", "هرمون إطلاق الجونادوتروبين (GnRH)", "الإستروجين", "البروجستيرون"]
+    },
+    {
+      "q": "The anterior pituitary gland is responsible for the secretion of which of the following combinations?",
+      "o": ["GnRH and Estrogen", "FSH and LH", "Progesterone and Androgens", "Estradiol and E1", "GnRH and Progesterone"],
+      "a": 1,
+      "trQ": "الغدة النخامية الأمامية مسؤولة عن إفرار أي من المجموعات التالية؟",
+      "trO": ["GnRH والإستروجين", "FSH و LH", "البروجستيرون والأندروجينات", "الإستراديول و E1", "GnRH والبروجستيرون"]
+    },
+    {
+      "q": "Which type of estrogen is primarily derived from subcutaneous fat converting intermediate androgenic compounds?",
+      "o": ["E2 (Estradiol)", "E3 (Estriol)", "E1 (Estrone)", "Progesterone", "Testosterone"],
+      "a": 2,
+      "trQ": "أي نوع من أنواع الإستروجين يتم استمداده أساساً من الدهون تحت الجلد عن طريق تحويل مركبات الأندروجين المتوسطة؟",
+      "trO": ["الإستراديول (E2)", "الإستريول (E3)", "الإسترون (E1)", "البروجستيرون", "التستوستيرون"]
+    },
+    {
+      "q": "During normal physiological processes, E2 (estradiol) is principally secreted by:",
+      "o": ["The placenta", "Subcutaneous fat", "The growing ovarian follicles", "The posterior pituitary gland", "The hypothalamus"],
+      "a": 2,
+      "trQ": "خلال العمليات الفسيولوجية الطبيعية، يتم إفراز الإستراديول (E2) بشكل أساسي عن طريق:",
+      "trO": ["المشيمة", "الدهون تحت الجلد", "حويصلات المبيض النامية", "الغدة النخامية الخلفية", "تحت المهاد"]
+    },
+    {
+      "q": "Which specific estrogen hormone is known to be secreted mainly by the placenta?",
+      "o": ["E1 (Estrone)", "E2 (Estradiol)", "E3 (Estriol)", "GnRH", "FSH"],
+      "a": 2,
+      "trQ": "ما هو هرمون الإستروجين المحدد المعروف بأنه يُفرز بشكل رئيسي عن طريق المشيمة؟",
+      "trO": ["الإسترون (E1)", "الإستراديول (E2)", "الإستريول (E3)", "GnRH", "FSH"]
+    },
+    {
+      "q": "Regarding progesterone metabolism in the body, where is it primarily metabolized?",
+      "o": ["In the kidneys", "In the liver", "In the ovaries", "In the spleen", "In the placenta"],
+      "a": 1,
+      "trQ": "فيما يتعلق بأيض البروجستيرون في الجسم، أين يتم أيضه بشكل أساسي؟",
+      "trO": ["في الكليتين", "في الكبد", "في المبايض", "في الطحال", "في المشيمة"]
+    },
+    {
+      "q": "What is the primary source of progesterone originating from the ovary?",
+      "o": ["Corpus luteum (CL)", "Growing ovarian follicles", "Stroma", "The anterior pituitary", "The hypothalamus"],
+      "a": 0,
+      "trQ": "ما هو المصدر الأساسي للبروجستيرون الناشئ من المبيض؟",
+      "trO": ["الجسم الأصفر (CL)", "حويصلات المبيض النامية", "السدى (Stroma)", "النخامية الأمامية", "تحت المهاد"]
+    },
+    {
+      "q": "In addition to the ovary (specifically the corpus luteum), which other organ contributes significantly to the sources of progesterone?",
+      "o": ["The liver", "The placenta", "The adrenal cortex", "The thyroid gland", "The kidneys"],
+      "a": 1,
+      "trQ": "بالإضافة إلى المبيض (تحديداً الجسم الأصفر)، ما هو العضو الآخر الذي يساهم بشكل كبير في مصادر البروجستيرون؟",
+      "trO": ["الكبد", "المشيمة", "قشرة الغدة الكظرية", "الغدة الدرقية", "الكليتان"]
+    },
+    {
+      "q": "After being metabolized, the end products of progesterone are predominantly excreted through which route?",
+      "o": ["Bile into the gut", "Sweat", "Urine", "Exhalation through lungs", "Saliva"],
+      "a": 2,
+      "trQ": "بعد عملية الأيض، يتم إخراج النواتج النهائية للبروجستيرون بشكل أساسي عبر أي طريق؟",
+      "trO": ["الصفراء إلى الأمعاء", "العرق", "البول", "الزفير عبر الرئتين", "اللعاب"]
+    },
+    {
+      "q": "Which of the following accurately describes the general nature of progesterone sources and types mentioned in the axis?",
+      "o": ["It has multiple distinct natural types metabolized in kidneys", "It is naturally one type, metabolized in the liver and excreted in urine", "It is synthesized exclusively by the hypothalamus", "It requires no metabolic processing before excretion", "It is stored entirely in subcutaneous fat"],
+      "a": 1,
+      "trQ": "أي مما يلي يصف بدقة الطبيعة العامة لمصادر وأنواع البروجستيرون المذكورة في المحور؟",
+      "trO": ["له عدة أنواع طبيعية متميزة يتم أيضها في الكليتين", "هو طبيعياً نوع واحد، يتم أيضه في الكبد ويُخرج في البول", "يتم تصنيعه حصرياً بواسطة تحت المهاد", "لا يتطلب أي معالجة أيضية قبل الإخراج", "يتم تخزينه بالكامل في الدهون تحت الجلد"]
+    },
+    {
+      "q": "True or False: The hypothalamus secretes Gonadotropin-releasing hormone (GnRH).",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يقوم الهيبوثلاموس (تحت المهاد) بإفراز هرمون إطلاق الجونادوتروبين (GnRH).",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Follicle-stimulating hormone (FSH) and luteinizing hormone (LH) are secreted by the posterior pituitary gland.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: يتم إفراز هرمون تنشيط الحوصلة (FSH) والهرمون الملوتن (LH) بواسطة الغدة النخامية الخلفية.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: E2 (estradiol) is primarily secreted by the growing ovarian follicles.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: الإستراديول (E2) يُفرز بشكل أساسي عن طريق حويصلات المبيض النامية.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: E3 (estriol) is known to be secreted from the placenta.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: من المعروف أن الإستريول (E3) يُفرز من المشيمة.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: The ovary is the sole and exclusive source of progesterone in the human body.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: المبيض هو المصدر الوحيد والحصري للبروجستيرون في جسم الإنسان.",
+      "trO": ["صحيح", "خطأ"]
+    }
+  ],
+  "place2": [
+    {
+      "q": "The ovarian cycle normally occurs in direct response to which central hormones?",
+      "o": ["Estrogen and Progesterone", "FSH and LH", "GnRH and hCG", "Prolactin and Oxytocin", "Testosterone and Androgens"],
+      "a": 1,
+      "trQ": "تحدث دورة المبيض عادة استجابة مباشرة لأي من الهرمونات المركزية التالية؟",
+      "trO": ["الإستروجين والبروجستيرون", "FSH و LH", "GnRH و hCG", "البرولاكتين والأكسيتوسين", "التستوستيرون والأندروجينات"]
+    },
+    {
+      "q": "Which of the following phases is characterized by follicle growth and the release of estrogen under the effect of FSH?",
+      "o": ["Luteal phase", "Secretory phase", "Follicular phase", "Menstrual phase", "Ischemic phase"],
+      "a": 2,
+      "trQ": "أي من المراحل التالية تتميز بنمو الحويصلات وإطلاق الإستروجين تحت تأثير الـ FSH؟",
+      "trO": ["المرحلة الأصفرية (Luteal)", "المرحلة الإفرازية", "المرحلة الحويصلية (Follicular)", "مرحلة الطمث", "المرحلة الإقفارية"]
+    },
+    {
+      "q": "The phase of the ovarian cycle that involves the release of the mature ovum is known as:",
+      "o": ["Ovulation", "Folliculogenesis", "Luteinization", "Atresia", "Implantation"],
+      "a": 0,
+      "trQ": "مرحلة دورة المبيض التي تتضمن إطلاق البويضة الناضجة تُعرف باسم:",
+      "trO": ["التبويض (Ovulation)", "تكون الحويصلات", "تكون الجسم الأصفر", "الضمور (Atresia)", "الانغراس"]
+    },
+    {
+      "q": "During the luteal phase of the ovarian cycle, the dominant follicle is transformed into the corpus luteum under the effect of:",
+      "o": ["FSH", "Estrogen", "LH", "hCG", "GnRH"],
+      "a": 2,
+      "trQ": "خلال المرحلة الأصفرية من دورة المبيض، تتحول الحويصلة السائدة إلى الجسم الأصفر تحت تأثير:",
+      "trO": ["FSH", "الإستروجين", "LH", "hCG", "GnRH"]
+    },
+    {
+      "q": "The corpus luteum primarily releases which of the following hormones during the luteal phase?",
+      "o": ["Estrogen", "Progesterone", "Testosterone", "FSH", "hCG"],
+      "a": 1,
+      "trQ": "يفرز الجسم الأصفر بشكل أساسي أي من الهرمونات التالية خلال المرحلة الأصفرية؟",
+      "trO": ["الإستروجين", "البروجستيرون", "التستوستيرون", "FSH", "hCG"]
+    },
+    {
+      "q": "How does the uterus primarily respond to the hormonal changes produced during the ovarian cycle?",
+      "o": ["By forming the placenta", "By producing hCG", "By forming the menstruation", "By suppressing ovulation", "By inducing menopause"],
+      "a": 2,
+      "trQ": "كيف يستجيب الرحم أساساً للتغيرات الهرمونية الناتجة خلال دورة المبيض؟",
+      "trO": ["عن طريق تكوين المشيمة", "عن طريق إنتاج hCG", "عن طريق تكوين الطمث (Menstruation)", "عن طريق تثبيط التبويض", "عن طريق تحفيز انقطاع الطمث"]
+    },
+    {
+      "q": "If the released ovum is fertilized and pregnancy occurs, what is the immediate substance released by the resulting embryo to prevent corpus luteum regression?",
+      "o": ["Progesterone", "Estrogen", "Human chorionic gonadotropin (hCG)", "FSH", "LH"],
+      "a": 2,
+      "trQ": "إذا تم إخصاب البويضة الملقحة وحدث الحمل، فما هي المادة التي يفرزها الجنين الناتج فوراً لمنع اضمحلال الجسم الأصفر؟",
+      "trO": ["البروجستيرون", "الإستروجين", "الجونادوتروبين المشيمي البشري (hCG)", "FSH", "LH"]
+    },
+    {
+      "q": "The corpus luteum of pregnancy continues to release estrogen and progesterone for approximately how long before the placenta is fully formed?",
+      "o": ["1 month", "2 months", "3 months", "6 months", "9 months"],
+      "a": 2,
+      "trQ": "يستمر جسم الحمل الأصفر في إطلاق الإستروجين والبروجستيرون لمدة تقريبية كم قبل أن تتكون المشيمة بالكامل؟",
+      "trO": ["شهر واحد", "شهرين", "3 أشهر", "6 أشهر", "9 أشهر"]
+    },
+    {
+      "q": "What structure takes over the production of estrogen and progesterone after the initial three months of pregnancy?",
+      "o": ["The corpus luteum", "The anterior pituitary", "The placenta", "The hypothalamus", "The adrenal glands"],
+      "a": 2,
+      "trQ": "ما هو التركيب الذي يتولى إنتاج الإستروجين والبروجستيرون بعد الأشهر الثلاثة الأولى من الحمل؟",
+      "trO": ["الجسم الأصفر", "النخامية الأمامية", "المشيمة", "تحت المهاد", "الغدد الكظرية"]
+    },
+    {
+      "q": "Which of the following events strictly precedes the formation of the placenta during early pregnancy in the described cycle?",
+      "o": ["Release of hCG preventing corpus luteum loss", "Immediate degeneration of the ovarian cycle", "Direct cessation of estrogen secretion", "Immediate conversion of placenta into endometrium", "Uterine atrophy"],
+      "a": 0,
+      "trQ": "أي من الأحداث التالية يسبق تماماً تكوين المشيمة خلال الحمل المبكر في الدورة الموصوفة؟",
+      "trO": ["إفراز hCG الذي يمنع فقدان الجسم الأصفر", "الضمور الفوري لدورة المبيض", "التوقف المباشر لإفراز الإستروجين", "التحول الفوري للمشيمة إلى بطانة الرحم", "ضمور الرحم"]
+    },
+    {
+      "q": "True or False: The follicular phase involves the growth of follicles and the release of estrogen under the effect of FSH.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: تتضمن المرحلة الحويصلية نمو الحويصلات وإطلاق الإستروجين تحت تأثير الـ FSH.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Luteal phase occurs when the dominant follicle turns into the corpus luteum under the effect of LH.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: تحدث المرحلة الأصفرية عندما تتحول الحويصلة السائدة إلى الجسم الأصفر تحت تأثير الـ LH.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: The embryo resulting from a fertilized ovum releases hCG to cause immediate destruction of the corpus luteum.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: يفرز الجنين الناتج عن بويضة مخصبة الـ hCG ليسبب التدمير الفوري للجسم الأصفر.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: The corpus luteum of pregnancy secretes estrogen and progesterone for the first 3 months of gestation.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يفرز جسم الحمل الأصفر الإستروجين والبروجستيرون لأول 3 أشهر من الحمل.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: The uterus responds to the central ovarian hormones by forming the menstruation process.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يستجيب الرحم لهرمونات المبيض المركزية عن طريق تشكيل عملية الطمث.",
+      "trO": ["صحيح", "خطأ"]
+    }
+  ],
+  "place3": [
+    {
+      "q": "A 24-year-old female inquires about the physiological trigger of her regular menses. Based on the endometrial cycle, what is the primary mechanism causing the shedding of the endometrium?",
+      "o": ["Decreased estrogen and progesterone release from the corpus luteum causing vasospasm and ischemia", "A sudden spike in estrogen and progesterone release", "Continuous high secretion of hCG from ovarian follicles", "Immediate cessation of hypothalamic GnRH pulse generator", "Prolonged proliferative stimulation of the stroma"],
+      "a": 0,
+      "trQ": "مريضة تبلغ من العمر 24 عاماً تسأل عن المحفز الفسيولوجي لدورتها الشهرية المنتظمة. بناءً على دورة بطانة الرحم، ما هو الميكانيزم الأساسي المسبب لتساقط بطانة الرحم؟",
+      "trO": ["انخفاض إطلاق الإستروجين والبروجستيرون من الجسم الأصفر مما يسبب تشنج الأوعية الدموية ونقص الدم (الإسكيميا)", "ارتفاع مفاجئ في إطلاق الإستروجين والبروجستيرون", "إفراز مستمر وعالٍ لـ hCG من حويصلات المبيض", "التوقف الفوري لمولد نبضات GnRH في الهيبوثلاموس", "تحفيز تكاثري مطول للسدى"]
+    },
+    {
+      "q": "During a clinical evaluation of menstrual parameters, which of the following statements regarding normal menstrual blood loss volume and distribution is correct?",
+      "o": ["Normal blood loss is 10-20 ml, with 80% occurring in the last two days", "Normal blood loss is 100-150 ml, distributed evenly across all days", "Normal blood loss is 30-80 ml, with 80% of this amount occurring in the first two days", "Normal blood loss is 30-80 ml, with 50% occurring during the ovulatory phase", "Normal blood loss exceeds 200 ml exclusively on day one"],
+      "a": 2,
+      "trQ": "خلال التقييم السريري لمواصفات الطمث، أي مما يلي صحيح بخصوص كمية وتوزيع فقد دم الطمث الطبيعي؟",
+      "trO": ["فقد الدم الطبيعي هو 10-20 مل، مع حدوث 80% في اليومين الأخيرين", "فقد الدم الطبيعي هو 100-150 مل، موزعة بالتساوي على كل الأيام", "فقد الدم الطبيعي هو 30-80 مل، ويحدث 80% من هذه الكمية في أول يومين", "فقد الدم الطبيعي هو 30-80 مل، مع حدوث 50% أثناء مرحلة التبويض", "فقد الدم الطبيعي يتجاوز 200 مل حصرياً في اليوم الأول"]
+    },
+    {
+      "q": "A patient asks about the typical physical characteristics of a healthy menstrual flow. Which of the following accurately describes the normal color and odor?",
+      "o": ["Dark black with an absolute absence of any odor", "Bright yellow fluid with a sweet fragrance", "Clear watery discharge with a metallic scent", "Bricky red in color with an offensive odor", "Greenish-white viscous fluid with foul discharge"],
+      "a": 3,
+      "trQ": "تسأل مريضة عن الخصائص الفيزيائية النموذجية لتدفق الطمث الصحي. أي مما يلي يصف بدقة اللون والرائحة الطبيعية؟",
+      "trO": ["أسود داكن مع غياب تام لأي رائحة", "سائل أصفر زاهٍ برائحة حلوة", "إفراز مائي شفاف برائحة معدنية", "أحمر طوبي اللون مع رائحة كريهة", "سائل لزج أبيض مائل للاخضرار مع إفراز كريه"]
+    },
+    {
+      "q": "How is 'Menarche' clinically defined, and what is its established mean age in a normal population?",
+      "o": ["The first spontaneous menstruation; mean age 12.5 years (range: 11-15 years)", "The final cessation of menses; mean age 51 years", "The irregular bleeding during mid-cycle; mean age 20 years", "The onset of painful dysmenorrhea; mean age 15 years", "The postpartum resumption of cycles; mean age 30 years"],
+      "a": 0,
+      "trQ": "كيف يُعرف 'Menarche' سريرياً، وما هو متوسط عمره المقرر في السكان الطبيعيين؟",
+      "trO": ["أول حيض تلقائي؛ متوسط العمر 12.5 سنة (النطاق: 11-15 سنة)", "التوقف النهائي للطمث؛ متوسط العمر 51 سنة", "النزيف غير المنتظم في منتصف الدورة؛ متوسط العمر 20 سنة", "بداية عسر الطمث المؤلم؛ متوسط العمر 15 سنة", "استئناف الدورات بعد الولادة؛ متوسط العمر 30 سنة"]
+    },
+    {
+      "q": "In fertility and cycle tracking, how is the 'Inter-menstrual period' correctly calculated?",
+      "o": ["From the first day of menstruation to the day of ovulation", "From the ovulation surge to the end of the luteal phase", "From the last day of menstruation until the first day of the next cycle", "Exclusively during the active days of bleeding", "Across a fixed 28-day window regardless of the previous cycle length"],
+      "a": 2,
+      "trQ": "في تتبع الخصوبة والدورة، كيف يتم حساب 'فترة ما بين الدورتين' بشكل صحيح؟",
+      "trO": ["من اليوم الأول للطمث وحتى يوم التبويض", "من ذروة التبويض وحتى نهاية المرحلة الأصفرية", "من اليوم الأخير للطمث حتى اليوم الأول للدورة التالية", "حصرياً خلال أيام النزيف النشط", "عبر نافذة ثابتة مدتها 28 يوماً بغض النظر عن طول الدورة السابقة"]
+    },
+    {
+      "q": "What is the normal physiological rhythm (frequency) range of a standard menstrual cycle?",
+      "o": ["6 to 8 weeks", "1 to 2 weeks", "3 to 5 weeks", "10 to 12 weeks", "Every 6 months"],
+      "a": 2,
+      "trQ": "ما هو النطاق الطبيعي للإيقاع الفسيولوجي (التكرار) لدورة طمث قياسية؟",
+      "trO": ["من 6 إلى 8 أسابيع", "من 1 إلى 2 أسبوع", "من 3 إلى 5 أسابيع", "من 10 إلى 12 أسبوعاً", "كل 6 أشهر"]
+    },
+    {
+      "q": "What is the accepted normal duration range for menstrual bleeding in healthy females?",
+      "o": ["8-10 days", "2-7 days", "1-2 days", "10-14 days", "More than 15 days"],
+      "a": 1,
+      "trQ": "ما هو نطاق المدة الطبيعية المقبول لنزيف الطمث لدى الإناث السليمات؟",
+      "trO": ["8-10 أيام", "2-7 أيام", "1-2 يوم", "10-14 يوم", "أكثر من 15 يوماً"]
+    },
+    {
+      "q": "Laboratory examination of the normal menstrual flow content typically reveals which of the following cellular and fluid components?",
+      "o": ["Amniotic fluid, trophoblastic tissues, and fetal cells", "Pure blood plasma and lymphocytes only", "Blood elements, endometrial debris and cells, degenerated ovum, cervical mucous, vaginal epithelial cells & vaginal discharge", "Peritoneal fluid and pure ovarian follicular fluid", "Cerebrospinal fluid derivatives and thick mucus exclusively"],
+      "a": 2,
+      "trQ": "يكشف الفحص المخبري لمحتوى تدفق الطمث الطبيعي عادةً عن أي من المكونات الخلوية والسائلة التالية؟",
+      "trO": ["سائل أمنيوسي، أنسجة أرومية تغذوية، وخلايا جنينية", "بلازما دم نقية وخلايا ليمفاوية فقط", "عناصر الدم، حطام وخلايا بطانة الرحم، بويضة متحللة، مخاط عنق الرحم، خلايا ظهارية مهبلية وإفرازات مهبلية", "سائل بريتوني وسائل حويصلة المبيض النقية", "مشتقات السائل النخاعي ومخاط سميك حصرياً"]
+    },
+    {
+      "q": "Which of the following sequences accurately lists the four phases of the menstrual cycle mentioned in the reference text?",
+      "o": ["Menstruation phase, resting phase, proliferative phase, and secretory phase", "Follicular phase, ovulatory phase, luteal phase, and secretory phase", "Proliferative phase, ischemic phase, decidual phase, and menstrual phase", "Pre-menstrual phase, mid-cycle phase, and post-menstrual phase", "Menstrual phase, embryonic phase, fetal phase, and involution phase"],
+      "a": 0,
+      "trQ": "أي مما يلي يدرد بدقة المراحل الأربع لدورة الطمث المذكورة في النص المرجعي؟",
+      "trO": ["مرحلة الطمث، مرحلة الراحة، المرحلة التكاثرية، والمرحلة الإفرازية", "المرحلة الحويصلية، مرحلة التبويض، المرحلة الأصفرية، والمرحلة الإفرازية", "المرحلة التكاثرية، المرحلة الإقفارية، المرحلة الساقطة، ومرحلة الطمث", "المرحلة ما قبل الطمث، مرحلة منتصف الدورة، ومرحلة ما بعد الطمث", "مرحلة الطمث، المرحلة الجنينية، مرحلة الجنين، ومرحلة الارتداد"]
+    },
+    {
+      "q": "In clinical documentation, the equation 'Menstrual Cycle = Endometrial Cycle' highlights the synchronized cyclic changes occurring primarily where?",
+      "o": ["In the anterior pituitary hormone output", "In the hypothalamic pulse generator", "In the myometrium contractility layers", "In the endometrium resulting in menstruation", "In the ovarian cortex follicles"],
+      "a": 3,
+      "trQ": "في التوثيق السريري، معادلة 'دورة الطمث = دورة بطانة الرحم' تسلط الضوء على التغيرات الدورية المتزامنة التي تحدث بشكل أساسي أين؟",
+      "trO": ["في إخراج هرمون النخامية الأمامية", "في مولد نبضات الهيبوثلاموس", "في طبقات انقباض عضلة الرحم (الميوميتريوم)", "في بطانة الرحم مما ينتج عنه الطمث", "في حويصلات قشرة المبيض"]
+    },
+    {
+      "q": "True or False: The normal amount of menstrual blood loss ranges strictly between 30 to 80 ml.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: تتراوح الكمية الطبيعية لفقد دم الطمث حصرياً بين 30 إلى 80 مل.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: The vast majority (80%) of the total menstrual blood loss typically occurs during the last two days of the bleeding phase.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: الغالبية العظمى (80%) من إجمالي فقد دم الطمث تحدث عادة خلال اليومين الأخيرين من مرحلة النزيف.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Menarche is clinically defined as the first spontaneous menstruation with a mean age of 12.5 years.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يُعرّف Menarche سريرياً بأنه أول حيض تلقائي بمتوسط عمر 12.5 سنة.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: The inter-menstrual period is calculated precisely from the last day of menstruation until the first day of the next cycle.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يتم حساب فترة ما بين الدورتين بدقة من اليوم الأخير للطمث حتى اليوم الأول للدورة التالية.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Menstruation is initiated by an abrupt increase in estrogen and progesterone release from the corpus luteum.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: يبدأ الطمث بزيادة مفاجئة في إطلاق الإستروجين والبروجستيرون من الجسم الأصفر.",
+      "trO": ["صحيح", "خطأ"]
+    }
+  ],
+  "place4": [
+    {
+      "q": "A 28-year-old female presents with regular menstrual cycles that are excessively heavy, lasting longer than 7 days and exceeding 80 cc in volume. How is this pattern clinically classified?",
+      "o": ["Hypomenorrhoea", "Menorrhagia (Hypermenorrhoea)", "Metrorrhagia", "Polymenorrhoea", "Oligomenorrhoea"],
+      "a": 1,
+      "trQ": "مريضة تبلغ من العمر 28 عاماً تشتكي من دورات شهرية منتظمة لكنها غزيرة بشكل مفرط، تستمر لأكثر من 7 أيام وتتجاوز 80 سم مكعب في الحجم. كيف يُصنف هذا النمط سريرياً؟",
+      "trO": ["قلة الطمث", "غزارة الطمث", "نزيف رحمي غير مرتبط بالدورة", "الدورة المتكررة", "ندرة الطمث"]
+    },
+    {
+      "q": "A patient complains of regular yet very scanty menstruation with a total blood loss volume of less than 20 ml. What is the correct medical term for this condition?",
+      "o": ["Menorrhagia", "Hypomenorrhoea", "Amenorrhoea", "Metrorrhagia", "Polymenorrhoea"],
+      "a": 1,
+      "trQ": "تشتكي مريضة من طمث منتظم لكنه شحيح جداً بقوة فقدان دم إجمالية أقل من 20 مل. ما هو المصطلح الطبي الصحيح لهذه الحالة؟",
+      "trO": ["غزارة الطمث", "قلة الطمث", "انقطاع الطمث", "نزيف رحمي غير منتظم", "دورة متكررة"]
+    },
+    {
+      "q": "Which of the following best defines 'Metrorrhagia' in clinical gynecological assessment?",
+      "o": ["Regular heavy menstruation occurring every 21 days", "Scanty regular menstruation lasting 2 days", "Irregular uterine bleeding not related to menstruation", "Prolonged bleeding occurring at irregular intervals", "Complete absence of menses for 6 months"],
+      "a": 2,
+      "trQ": "أي مما يلي يُعرف بدقة في التقييم النسائي السريري؟",
+      "trO": ["طمث غزير منتظم يحدث كل 21 يوماً", "طمث منتظم شحيح يستمر يومين", "نزيف رحمي غير منتظم ليس له علاقة بالدورة الشهرية", "نزيف مطول يحدث على فترات غير منتظمة", "غياب تام للطمث لمدة 6 أشهر"]
+    },
+    {
+      "q": "A patient experiences prolonged and heavy bleeding that occurs completely at irregular intervals. Which term accurately describes this mixed presentation?",
+      "o": ["Menometrorrhagia", "Polymenorrhagia", "Oligomenorrhoea", "Hypomenorrhoea", "Amenorrhoea"],
+      "a": 0,
+      "trQ": "تعاني مريضة من نزيف مطول وغزير يحدث تماماً على فترات غير منتظمة. أي مصطلح يصف بدقة هذا العرض المختلط؟",
+      "trO": ["غزارة النزيف الرحمي غير المنتظم", "دورة متكررة وغزيرة", "ندرة الطمث", "قلة الطمث", "انقطاع الطمث"]
+    },
+    {
+      "q": "How is 'Polymenorrhoea' specifically characterized regarding cycle frequency?",
+      "o": ["Infrequent cycles occurring every 6 weeks", "Frequent and regular menstruation recurring every less than 21 days", "Regular cycles occurring every 35 days", "Completely irregular bleeding with no pattern", "Total absence of menses for 3 successive cycles"],
+      "a": 1,
+      "trQ": "كيف تُتميز حالة تكرار الدورة بشكل محدد فيما يتعلق بانتظامها؟",
+      "trO": ["دورات غير متكررة تحدث كل 6 أسابيع", "طمث متكرر ومنتظم يتكرر كل أقل من 21 يوماً", "دورات منتظمة تحدث كل 35 يوماً", "نزيف غير منتظم تماماً بدون نمط", "غياب تام للطمث لـ 3 دورات متتالية"]
+    },
+    {
+      "q": "A patient reports having infrequent cycles every 6 weeks to 6 months, experiencing only 1 or 2 cycles in 90 days. This condition is known as:",
+      "o": ["Polymenorrhoea", "Menorrhagia", "Oligomenorrhoea", "Metrorrhagia", "Menometrorrhagia"],
+      "a": 2,
+      "trQ": "تفيد مريضة بأنها تعاني من دورات غير متكررة كل 6 أسابيع إلى 6 أشهر، حيث تختبر دورة أو دورتين فقط في 90 يوماً. تُعرف هذه الحالة بـ:",
+      "trO": ["دورة متكررة", "غزارة الطمث", "ندرة الطمث", "نزيف رحمي غير منتظم", "غزارة نزيف غير منتظم"]
+    },
+    {
+      "q": "What term describes a menstrual pattern that is both frequent, heavy, and/or prolonged?",
+      "o": ["Polymenorrhagia", "Hypomenorrhoea", "Oligomenorrhoea", "Menometrorrhagia", "Metrorrhagia"],
+      "a": 0,
+      "trQ": "ما هو المصطلح الذي يصف نمط الطمث الذي يكون متكرراً، غزيراً، و/أو مطولاً في نفس الوقت؟",
+      "trO": ["دورة متكررة وغزيرة", "قلة الطمث", "ندرة الطمث", "غزارة نزيف غير منتظم", "نزيف رحمي غير منتظم"]
+    },
+    {
+      "q": "Bleeding resulting from tissue contact such as a PV examination, intercourse, or minor trauma is clinically termed:",
+      "o": ["Ovulation spotting", "Breakthrough bleeding", "Contact bleeding", "Postmenopausal bleeding", "Menometrorrhagia"],
+      "a": 2,
+      "trQ": "النزيف الناتج عن ملامسة الأنسجة مثل الفحص المهبلي، الجماع، أو الصدمات البسيطة يُسمى سريرياً:",
+      "trO": ["تنقيط التبويض", "نزيف انطلاقي", "نزيف بسبب التلامس", "نزيف بعد سن اليأس", "غزارة نزيف غير منتظم"]
+    },
+    {
+      "q": "What is the clinical definition of 'Postmenopausal bleeding'?",
+      "o": ["Any vaginal bleeding occurring 1 year following the establishment of menopause", "Bleeding occurring during the mid-cycle ovulation phase", "Bleeding triggered immediately by physical intercourse", "Heavy menstrual flow occurring every 15 days", "Complete cessation of menses for 3 months"],
+      "a": 0,
+      "trQ": "ما هو التعريف السريري لنزيف ما بعد انقطاع الطمث؟",
+      "trO": ["أي نزيف مهبلي يحدث بعد سنة واحدة من حدوث سن اليأس", "نزيف يحدث خلال مرحلة تبويض منتصف الدورة", "نزيف يحفزه الجماع البدني فوراً", "تدفق طمثي غزير يحدث كل 15 يوماً", "غياب تام للطمث لمدة 3 أشهر"]
+    },
+    {
+      "q": "According to the criteria for 'Amenorrhoea', how long must menses be absent to meet the definition based on successive cycles?",
+      "o": ["1 successive regular cycle", "2 successive regular cycles", "3 successive regular cycles or for 6 months", "12 successive months strictly", "6 successive regular cycles or for 1 year"],
+      "a": 2,
+      "trQ": "وفقاً لمعايير انقطاع الطمث، ما هي المدة التي يجب أن يغيب فيها الطمث لتلبية التعريف بناءً على الدورات المتتالية؟",
+      "trO": ["دورة منتظمة متتالية واحدة", "دورتان منتظمتان متتاليتان", "3 دورات منتظمة متتالية أو لمدة 6 أشهر", "12 شهراً متتالياً بصورة صارمة", "6 دورات منتظمة متتالية أو لمدة سنة واحدة"]
+    },
+    {
+      "q": "True or False: Menorrhagia is defined as regular heavy and/or prolonged bleeding exceeding 7 days and/or 80 cc.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: تُعرف غزارة الطمث بأنها نزيف منتظم غزير و/أو مطول يتجاوز 7 أيام و/أو 80 سم مكعب.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Oligomenorrhoea refers to frequent and regular menstruation recurring every less than 21 days.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: تشير ندرة الطمث إلى طمث متكرر ومنتظم يتكرر كل أقل من 21 يوماً.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Contact bleeding includes irregular bleeding following tissue contact such as a PV examination or intercourse.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يتضمن نزيف التلامس النزيف غير المنتظم بعد ملامسة الأنسجة مثل الفحص المهبلي أو الجماع.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Postmenopausal bleeding is classified as any vaginal bleeding occurring 1 year following menopause.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يُصنف نزيف ما بعد سن اليأس على أنه أي نزيف مهبلي يحدث بعد سنة واحدة من سن اليأس.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Inter-menstrual bleeding includes ovulation spotting and breakthrough bleeding in between normal periods.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يتضمن النزيف ما بين الدورتين تنقيط التبويض والنزيف الانطلاقي بين الفترات العادية.",
+      "trO": ["صحيح", "خطأ"]
+    }
+  ],
+  "place5": [
+    {
+      "q": "A 46-year-old perimenopausal female presents with heavy menstrual bleeding. Which of the following is considered a primary possible structural or pathological cause for perimenopausal menorrhagia?",
+      "o": ["Anovulation", "Uterine fibroid", "Iatrogenic hormone therapy", "Atrophic vaginitis", "Cervical polyp"],
+      "a": 1,
+      "trQ": "مريضة تبلغ من العمر 46 عاماً في مرحلة ما قبل انقطاع الطمث تشتكي من نزيف طمث غزير. أي مما يلي يُعتبر سبباً هيكلياً أو مرضياً رئيسياً محتملاً لغزارة الطمث في هذه المرحلة؟",
+      "trO": ["غياب التبويض", "ورم ليفي بالرحم", "علاج هرموني علاجي المنشأ", "التهاب المهام الضموري", "بوليب عنق الرحم"]
+    },
+    {
+      "q": "In evaluating possible causes of perimenopausal menorrhagia, which systemic hematological disorder is frequently listed among the common causes?",
+      "o": ["Coagulopathy", "Atrophic endometritis", "Anovulation", "Endometrial polyp", "Cervical malignancy"],
+      "a": 0,
+      "trQ": "عند تقييم الأسباب المحتملة لغزارة الطمث في مرحلة ما قبل انقطاع الطمث، أي اضطراب دموي جهازى يتم إدراجه غالباً ضمن الأسباب الشائعة؟",
+      "trO": ["خلل في تجلط الدم", "التهاب بطانة الرحم الضموري", "عدم التبويض", "بوليب بطانة الرحم", "سرطان عنق الرحم"]
+    },
+    {
+      "q": "Which of the following conditions is specifically listed as a possible cause for perimenopausal metrorrhagia rather than menorrhagia?",
+      "o": ["Uterine fibroid", "Adenomyosis", "Anovulation", "Coagulopathy", "Endometrial hyperplasia"],
+      "a": 2,
+      "trQ": "أي من الحالات التالية مدرجة تحديداً كسبب محتمل للنزيف الرحمي غير المنتظم (Metrorrhagia) في مرحلة ما قبل انقطاع الطمث بدلاً من غزارة الطمث؟",
+      "trO": ["ورم ليفي بالرحم", "التغدد الرحمي", "عدم التبويض", "خلل في تجلط الدم", "زيادة سمك بطانة الرحم"]
+    },
+    {
+      "q": "A 53-year-old postmenopausal woman presents with vaginal bleeding occurring one year after the cessation of menses. Which of the following is a classic benign atrophic cause for this presentation?",
+      "o": ["Uterine malignancy", "Atrophic changes (atrophic vaginitis and endometritis)", "Coagulopathy", "Adenomyosis", "Submucosal fibroid"],
+      "a": 1,
+      "trQ": "مريضة تبلغ من العمر 53 عاماً بعد سن اليأس تشتكي من نزيف مهبلي يحدث بعد سنة من توقف الطمث. أي مما يلي يُعتبر سبباً حميداً وضمورياً كلاسيكياً لهذا العرض؟",
+      "trO": ["سرطان الرحم", "التغيرات الضمورية (التهاب المهام والتهاب بطانة الرحم الضموري)", "خلل في تجلط الدم", "التغدد الرحمي", "ورم ليفي تحت المخاطية"]
+    },
+    {
+      "q": "In the differential diagnosis of postmenopausal bleeding, what does 'Iatrogenic' etiology commonly refer to?",
+      "o": ["Spontaneous endometrial hyperplasia", "Hormone replacement therapy (HRT)", "Atrophic vaginitis", "Cervical polyp formation", "Idiopathic coagulopathy"],
+      "a": 1,
+      "trQ": "في التشخيص التفريقي لنزيف ما بعد سن اليأس، إلى ماذا تشير المسببات الناتجة عن علاج خاطئ أو طبي (Iatrogenic) بشكل شائع؟",
+      "trO": ["فرط تنسج بطانة الرحم التلقائي", "العلاج بالهرمونات التعويضية", "التهاب المهبل الضموري", "تكون بوليب عنق الرحم", "خلل التجلط مجهول السبب"]
+    },
+    {
+      "q": "According to the FIGO 2011 classification system (PALM-COEIN) for causes of abnormal uterine bleeding in nongravid women of reproductive age, which of the following is categorized under the 'Structural' (PALM) group?",
+      "o": ["Coagulopathy", "Adenomyosis", "Ovulatory dysfunction", "Endometrial disorders", "Iatrogenic causes"],
+      "a": 1,
+      "trQ": "وفقاً لنظام تصنيف FIGO لعام 2011 لأسباب النزيف الرحمي غير الطبيعي لدى النساء غير الحوامل في سن الإنجاب، أي مما يلي يُصنف ضمن مجموعة الأسباب الهيكلية؟",
+      "trO": ["خلل تجلط الدم", "التغدد الرحمي", "خلل التبويض", "اضطرابات بطانة الرحم", "أسباب علاجية المنشأ"]
+    },
+    {
+      "q": "Within the FIGO 2011 classification framework, which category includes 'Coagulopathy' and 'Ovulatory dysfunction'?",
+      "o": ["Structural (PALM)", "Non-structural (COEIN)", "Submucosal group", "Malignancy and hyperplasia group", "Atrophic group"],
+      "a": 1,
+      "trQ": "ضمن إطار تصنيف FIGO لعام 2011، أي فئة تتضمن خلل تجلط الدم الخلوي وخلل وظائف التبويض؟",
+      "trO": ["الأسباب الهيكلية", "الأسباب غير الهيكلية", "مجموعة تحت المخاطية", "مجموعة الأورام وفرط التنسج", "المجموعة الضمورية"]
+    },
+    {
+      "q": "Which of the following is explicitly listed under the FIGO classification as a structural component starting with 'L'?",
+      "o": ["Leiomyoma (fibroid)", "Lymphatic disorder", "Lipoma", "Luteal phase defect", "Lactation changes"],
+      "a": 0,
+      "trQ": "أي مما يلي مدرج صراحة تحت تصنيف الأسباب الهيكلية بحرف الـ L؟",
+      "trO": ["الورم العضلي الأملس", "اضطراب الجهاز الليمفاوي", "ورم شحمي", "خلل المرحلة الأصفرية", "تغيرات الرضاعة"]
+    },
+    {
+      "q": "When analyzing causes of perimenopausal metrorrhagia, which diagnostic category encompasses both uterine and cervical types?",
+      "o": ["Anovulation", "Malignancy", "Coagulopathy", "Adenomyosis", "Atrophic changes"],
+      "a": 1,
+      "trQ": "عند تحليل أسباب نزيف ما قبل سن اليأس غير المنتظم، أي فئة تشمل النوعين الرحمي وعنق الرحم معاً؟",
+      "trO": ["عدم التبويض", "الأورام الخبيثة", "خلل التجلط", "التغدد الرحمي", "التغيرات الضمورية"]
+    },
+    {
+      "q": "Which of the following is a shared possible cause appearing in both perimenopausal menorrhagia and postmenopausal bleeding lists?",
+      "o": ["Adenomyosis", "Endometrial hyperplasia", "Atrophic vaginitis", "Anovulation", "Coagulopathy"],
+      "a": 1,
+      "trQ": "أي مما يلي يُعتبر سبباً مشتركاً محتملاً يظهر في قائمتي غزارة طمث ما قبل سن اليأس ونزيف ما بعد سن اليأس معاً؟",
+      "trO": ["التغدد الرحمي", "زيادة سمك بطانة الرحم", "التهاب المهبل الضموري", "عدم التبويض", "خلل التجلط"]
+    },
+    {
+      "q": "True or False: Uterine fibroid and adenomyosis are listed among the possible causes of perimenopausal menorrhagia.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: الورم الليفي بالرحم والتغدد الرحمي مدرجان ضمن الأسباب المحتملة لغزارة طمث ما قبل سن اليأس.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Atrophic changes such as atrophic vaginitis are a primary cause of perimenopausal menorrhagia.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: التغيرات الضمورية مثل التهاب المهبل الضموري تُعد سبباً رئيسياً لغزارة طمث ما قبل سن اليأس.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: HRT (Hormone Replacement Therapy) is categorized as an iatrogenic cause of postmenopausal bleeding.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يُصنف العلاج بالهرمونات التعويضية كسبب علاجي المنشأ لنزيف ما بعد سن اليأس.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: In the FIGO 2011 system, adenomyosis is classified under the Non-structural category.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: في نظام FIGO لعام 2011، يُصنف التغدد الرحمي ضمن فئة الأسباب غير الهيكلية.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Coagulopathy is classified under the Non-structural causes in the FIGO PALM-COEIN classification.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يُصنف خلل تجلط الدم ضمن الأسباب غير الهيكلية في تصنيف FIGO.",
+      "trO": ["صحيح", "خطأ"]
+    }
+  ],
+  "place6": [
+    {
+      "q": "A female patient complains of lower abdominal pain occurring precisely in the middle of her menstrual cycle. What is the precise medical term for this phenomenon?",
+      "o": ["Menstrual molimina", "Ovulatory or Mittelschmerz pain", "Premenstrual syndrome", "Primary dysmenorrhea", "Crescendovaginal pain"],
+      "a": 1,
+      "trQ": "تشتكي مريضة من ألم في أسفل البطن يحدث بالتحديد في منتصف الدورة الشهرية. ما هو المصطلح الطبي الدقيق لهذه الظاهرة؟",
+      "trO": ["الألم المصاحب للطمث", "ألم التبويض", "متلازمة ما قبل الطمث", "عسر الطمث الأولي", "ألم مهبلي متصاعد"]
+    },
+    {
+      "q": "Which of the following best defines 'Menstrual molimina' during the ovarian cycle?",
+      "o": ["A set of mild physiologic symptoms like breast tenderness, fatigue, and food cravings occurring in the luteal phase", "Severe psychiatric impairment occurring during menstruation", "Painful menstruation caused by gross pelvic pathology", "Cyclic severe somatic symptoms that disrupt normal daily duties", "Sudden passage of an endometrial cast during menses"],
+      "a": 0,
+      "trQ": "أي مما يلي يُعَرّف بدقة 'ألم أو صعوبات الأداء المصاحبة للطمث' أثناء دورة المبيض؟",
+      "trO": ["مجموعة من الأعراض الفسيولوجية الخفيفة مثل تورم الثدي، الإرهاق، والرغبة الشديدة في الأكل والتي تحدث في المرحلة الأصفرية", "اختلال نفسي حاد يحدث أثناء الطمث", "طمث مؤلم بسبب أمراض الحوض الكروسية", "أراض جسدية دورية حادة تعطل الواجبات اليومية العادية", "خروج مفاجئ لقالب بطانة الرحم أثناء الطمث"]
+    },
+    {
+      "q": "Why is 'Menstrual molimina' distinguished from premenstrual syndrome (PMS) in clinical classification?",
+      "o": ["Because molimina only occurs after menstruation has ended", "Because molimina involves severe pathological pelvic lesions", "Because molimina symptoms do not interfere with normal daily duties", "Because molimina requires surgical intervention", "Because molimina is categorized under secondary dysmenorrhea"],
+      "a": 2,
+      "trQ": "لماذا يتم التمييز بين 'الصعوبات المصاحبة للطمث' ومتلازمة ما قبل الطمث في التصنيف السريري؟",
+      "trO": ["لان الصعوبات تحدث فقط بعد انتهاء الطمث", "لان الصعوبات تتضمن آفات حوضية مرضية كبرى", "لان أعراض الصعوبات لا تتداخل مع الواجبات اليومية العادية", "لان الصعوبات تتطلب تدخلاً جراحياً", "لانها تُصنف تحت عسر الطمث الثانوي"]
+    },
+    {
+      "q": "A patient suffers from severe somatic, psychological, and emotional symptoms that arise during the premenstrual phase and completely resolve by the end of menstruation. What condition does this describe?",
+      "o": ["Ovulatory pain", "Menstrual molimina", "Primary dysmenorrhea", "Premenstrual syndrome (PMS)", "Membranous dysmenorrhea"],
+      "a": 3,
+      "trQ": "تعاني مريضة من أعراض جسدية ونفسية وعاطفية حادة تنشأ خلال مرحلة ما قبل الطمث وتزول تماماً بنهاية الطمث. ما هي الحالة التي تصف ذلك؟",
+      "trO": ["ألم التبويض", "الصعوبات المصاحبة للطمث", "عسر الطمث الأولي", "متلازمة ما قبل الطمث", "عسر الطمث الغشائي"]
+    },
+    {
+      "q": "How is 'Dysmenorrhea' clinically differentiated from normal menstrual discomfort?",
+      "o": ["It occurs exclusively 14 days before ovulation", "It is characterized by total absence of pelvic pain", "It involves mild breast tenderness without uterine cramps", "It only affects postmenopausal women", "It is pain related to menses severe enough to interrupt a woman from doing her daily duties"],
+      "a": 4,
+      "trQ": "كيف يتم التمييز سريرياً بين عسر الطمث وعدم الراحة الطبيعي المرتبط بالطمث؟",
+      "trO": ["يحدث حصرياً قبل التبويض بـ 14 يوماً", "يتميز بغياب تام لألم الحوض", "يتضمن تورماً خفيفاً في الثدي بدون تقلصات بالرحم", "يؤثر فقط على النساء بعد سن اليأس", "هو ألم مرتبط بالطمث شديد بما فيه الكفاية لإعاقة المرأة عن أداء واجباتها اليومية"]
+    },
+    {
+      "q": "Which type of dysmenorrhea is characterized by painful menstruation occurring in the absence of any gross pelvic pathology?",
+      "o": ["Primary dysmenorrhea", "Secondary dysmenorrhea", "Membranous dysmenorrhea", "Crescent dysmenorrhea", "Obstructive dysmenorrhea"],
+      "a": 0,
+      "trQ": "أي نوع من عسر الطمث يتميز بحدوث طمث مؤلم في غياب أي آفة حوضية إجمالية واضحة؟",
+      "trO": ["عسر الطمث الأولي", "عسر الطمث الثانوي", "عسر الطمث الغشائي", "عسر الطمث المتصاعد", "عسر الطمث الانسدادي"]
+    },
+    {
+      "q": "What specific feature defines 'Membranous dysmenorrhea'?",
+      "o": ["Pain starting 5 days before menses with gradual decline", "Pain caused exclusively by secondary pelvic infections", "A type of spasmodic dysmenorrhea characterized by the passage of an endometrial cast", "Complete absence of uterine contractions", "Pain restricted strictly to the ovulation window"],
+      "a": 2,
+      "trQ": "ما هي الميزة المحددة التي تميز 'عسر الطمث الغشائي'؟",
+      "trO": ["ألم يبدأ قبل الطمث بـ 5 أيام مع انخفاض تدريجي", "ألم ناجم حصرياً عن عدوى الحوض الثانوية", "نوع من عسر الطمث التشنجي يتميز بمرور قالب بطانة الرحم", "غياب تام لانقباضات الرحم", "ألم مقصور حصرياً على نافذة التبويض"]
+    },
+    {
+      "q": "When a female experiences painful menstruation in the presence of an underlying pelvic pathology (such as endometriosis or fibroids), how is it classified?",
+      "o": ["Primary dysmenorrhea", "Menstrual molimina", "Mittelschmerz", "Secondary dysmenorrhea", "Premenstrual syndrome"],
+      "a": 3,
+      "trQ": "عندما تعاني أنثى من طمث مؤلم في وجود أمراض أو آفات حوضية كامنة (مثل بطانة الرحم المهاجرة أو الألياف)، كيف يُصنف ذلك؟",
+      "trO": ["عسر الطمث الأولي", "الصعوبات المصاحبة للطمث", "ألم منتصف الدورة", "عسر الطمث الثانوي", "متلازمة ما قبل الطمث"]
+    },
+    {
+      "q": "In 'Crescendo dysmenorrhea', how does the pain pattern classically progress relative to the menstrual flow?",
+      "o": ["Pain starts abruptly and disappears within the first hour", "Pain occurs only during mid-cycle ovulation", "Pain is constant and never changes in intensity", "Pain begins only after the menstrual bleeding completely stops", "Pain starts 3-5 days before menses, increases to be maximum at the end of the flow, then decreases gradually"],
+      "a": 4,
+      "trQ": "في 'عسر الطمث المتصاعد'، كيف يتطور نمط الألم كلاسيكياً بالنسبة لتدفق الطمث؟",
+      "trO": ["يبدأ الألم فجأة ويختفي خلال الساعة الأولى", "يحدث الألم فقط أثناء تبويض منتصف الدورة", "الألم ثابت ولا يتغير في الشدة أبداً", "يبدأ الألم فقط بعد توقف نزيف الطمث تماماً", "يبدأ الألم قبل الطمث بـ 3 إلى 5 أيام، ويزداد ليصل إلى ذروته عند نهاية التدفق، ثم يقل تدريجياً"]
+    },
+    {
+      "q": "What physiological mechanism classically triggers the characteristic pain pattern in 'Crescendo dysmenorrhea'?",
+      "o": ["Congestion of ectopic endometrial glands causing increasing pain, reaching a peak as glands fill with blood, followed by a decrease as blood is absorbed", "Immediate rupture of ovarian follicles", "Sudden cessation of estrogen secretion from the corpus luteum", "Acute infection of the cervical os", "Complete atrophy of the myometrium layers"],
+      "a": 0,
+      "trQ": "ما هو الميكانيزم الفسيولوجي الذي يطلق كلاسيكياً نمط الألم المميز في 'عسر الطمث المتصاعد'؟",
+      "trO": ["احتقان غدد بطانة الرحم المهاجرة مما يسبب زيادة الألم، ليصل إلى ذروته مع امتلاء الغدد بالدم، يليه انخفاض مع امتصاص الدم", "تمزق فوري لحويصلات المبيض", "توقف مفاجئ لإفراز الإستروجين من الجسم الأصفر", "عدوى حادة في فتحة عنق الرحم", "ضمور كامل لطبقات عضلة الرحم"]
+    },
+    {
+      "q": "True or False: Ovulatory or Mittelschmerz pain refers to the pain occurring in the middle of the cycle.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يشير ألم التبويض أو ميتلشمرتس إلى الألم الذي يحدث في منتصف الدورة.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Menstrual molimina is considered a severe form of premenstrual syndrome that interferes with daily duties.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: تُعتبر الصعوبات المصاحبة للطمث شكلاً حاداً لمتلازمة ما قبل الطمث التي تتداخل مع الواجبات اليومية.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Primary dysmenorrhea is defined as painful menstruation in the absence of gross pelvic lesion.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يُعرّف عسر الطمث الأولي بأنه طمث مؤلم في غياب أي آفة حوضية واضحة.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Membranous dysmenorrhea involves the passage of an endometrial cast.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يتضمن عسر الطمث الغشائي مرور قالب بطانة الرحم.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: In crescendo dysmenorrhea, pain starts after menses and reaches maximum at the beginning of the flow.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: في عسر الطمث المتصاعد، يبدأ الألم بعد الطمث ويصل للذروة في بداية التدفق.",
+      "trO": ["صحيح", "خطأ"]
+    }
+  ],
+  "place7": [
+    {
+      "q": "A 29-year-old couple presents to the clinic concerned because they have been trying to conceive for 14 months with regular unprotected intercourse without success. How should their condition be clinically classified?",
+      "o": ["Subfertility requiring 24 months for diagnosis", "Secondary infertility", "Infertility, as they exceeded the 12-month threshold", "Normal physiological delay", "Unexplained sterility"],
+      "a": 2,
+      "trQ": "زوجان في التاسعة والعشرين من العمر حضرا للعيادة لقلقهما من عدم حدوث حمل رغم مرور 14 شهراً من العلاقة الزوجية المنتظمة بدون موانع. كيف تُصنف حالتهما سريرياً؟",
+      "trO": ["ضعف خصوبة يتطلب 24 شهراً للتشخيص", "عقم ثانوي", "عقم، لتجاوزهما حاجز الـ 12 شهراً", "تأخر فسيولوجي طبيعي", "عقم دائم غير مفسر"]
+    },
+    {
+      "q": "A healthy 25-year-old couple asks about their natural chances of achieving pregnancy if they engage in regular unprotected intercourse for a full year. What is the expected conception rate?",
+      "o": ["80% to 85%", "15% to 20%", "50% to 70%", "30% to 40%", "95% to 100%"],
+      "a": 0,
+      "trQ": "زوجان سليمان بعمر 25 عاماً يسألان عن فرصهما الطبيعية في حدوث حمل إذا استمرت العلاقة المنتظمة غير المحمية لمدة عام كامل. ما هو معدل الحمل المتوقع؟",
+      "trO": ["80% إلى 85%", "15% إلى 20%", "50% إلى 70%", "30% إلى 40%", "95% إلى 100%"]
+    },
+    {
+      "q": "When counseling a couple trying to conceive on timing, what is the optimal coital frequency recommended to maximize fertilization chances?",
+      "o": ["Daily intercourse throughout the month", "Twice weekly during the luteal phase", "Once a week", "Every other day", "Strictly on day 14 only"],
+      "a": 3,
+      "trQ": "عند تقديم المشورة لزوجين يسعيان للإنجاب حول التوقيت، ما هو معدل الجماع الأمثل الموصى به لزيادة فرص الإخصاب؟",
+      "trO": ["جماع يومي طوال الشهر", "مرتين أسبوعياً خلال المرحلة الأصفرية", "مرة واحدة أسبوعياً", "يوم بعد يوم", "حصرياً في اليوم الرابع عشر فقط"]
+    },
+    {
+      "q": "A 32-year-old woman with a history of one previous pregnancy that ended in a spontaneous miscarriage 3 years ago has been unable to conceive since then despite regular unprotected intercourse. How is her condition classified?",
+      "o": ["Primary infertility", "Recurrent pregnancy loss", "Unexplained subfertility", "Premature ovarian failure", "Secondary infertility"],
+      "a": 4,
+      "trQ": "سيدة تبلغ من العمر 32 عاماً لديها تاريخ لحمل سابق انتهى بإجهاض تلقائي منذ 3 سنوات، ولم تتمكن من الحمل منذ ذلك الحين رغم العلاقة المنتظمة غير المحمية. كيف تُصنف حالتها؟",
+      "trO": ["عقم أولي", "إجهاض متكرر", "ضعف خصوبة غير مفسر", "فشل مبيضي مبكر", "عقم ثانوي"]
+    },
+    {
+      "q": "Epidemiologically, what are the respective prevalence rates of primary and secondary infertility in Egypt?",
+      "o": ["Primary 12% and Secondary 15%", "Primary 4.3% and Secondary 7.7%", "Primary 7.7% and Secondary 4.3%", "Primary 10% and Secondary 12%", "Primary 15% and Secondary 10%"],
+      "a": 1,
+      "trQ": "من الناحية الوبائية، ما هي معدلات انتشار العقم الأولي والثانوي على التوالي في مصر؟",
+      "trO": ["الأولي 12% والثانوي 15%", "الأولي 4.3% والثانوي 7.7%", "الأولي 7.7% والثانوي 4.3%", "الأولي 10% والثانوي 12%", "الأولي 15% والثانوي 10%"]
+    },
+    {
+      "q": "During the initial workup of an infertile couple, which investigation must be performed first?",
+      "o": ["Hysterosalpingography for the wife", "Mid-luteal serum progesterone", "Semen analysis for the husband", "Diagnostic laparoscopy", "Endometrial biopsy"],
+      "a": 2,
+      "trQ": "أثناء الفحص المبدئي لزوجين يعانيان من العقم، أي فحص يجب إجراؤه أولاً؟",
+      "trO": ["أشعة بالصبغة على الرحم والأنابيب للزوجة", "قياس هرمون البروجستيرون في منتصف المرحلة الأصفرية", "تحليل السائل المنوي للزوج", "منظار بطن تشخيصي", "خزعة من بطانة الرحم"]
+    },
+    {
+      "q": "A 34-year-old man undergoes a semen analysis as part of an infertility evaluation. According to WHO criteria, which of the following results falls BELOW the normal lower reference limit?",
+      "o": ["Semen volume of 2.0 ml", "Sperm concentration of 18 million/ml", "Total motility of 45%", "Progressive motility of 25%", "Normal sperm morphology of 5%"],
+      "a": 3,
+      "trQ": "رجل يبلغ من العمر 34 عاماً أجرى تحليل سائل منوي كجزء من تقييم العقم. وفقاً لمعايير منظمة الصحة العالمية، أي من النتائج التالية تقع تحت الحد المرجعي الطبيعي الأدنى؟",
+      "trO": ["حجم السائل المنوي 2.0 مل", "تركيز الحيوانات المنوية 18 مليون/مل", "الحركة الكلية 45%", "الحركة التقدمية 25%", "الأشكال الطبيعية 5%"]
+    },
+    {
+      "q": "In a standard WHO semen analysis report, what is the minimum normal value for total sperm number per ejaculate and vitality (live spermatozoa), respectively?",
+      "o": ["40 million and 58%", "15 million and 32%", "32 million and 40%", "58 million and 4%", "1.5 million and 7.2%"],
+      "a": 0,
+      "trQ": "في تقرير تحليل السائل المنوي القياسي لمنظمة الصحة العالمية، ما هي القيمة الطبيعية الدنيا للعدد الكلي للحيوانات المنوية في القذفة الواحدة ونسبة الحيوية على التوالي؟",
+      "trO": ["40 مليون و 58%", "15 مليون و 32%", "32 مليون و 40%", "58 مليون و 4%", "1.5 مليون و 7.2%"]
+    },
+    {
+      "q": "A semen sample shows a pH of 6.8, normal morphology of 4%, and volume of 1.5 ml. Which parameter is abnormal based on WHO reference values?",
+      "o": ["Normal morphology", "Semen volume", "Total sperm count", "Vitality percentage", "Semen pH (normal is >7.2)"],
+      "a": 4,
+      "trQ": "تُظهر عينة سائل منوي درجة حموضة 6.8، وأشكال طبيعية 4%، وحجم 1.5 مل. أي معامل يُعد غير طبيعي بناءً على القيم المرجعية لمنظمة الصحة العالمية؟",
+      "trO": ["الأشكال الطبيعية", "حجم السائل المنوي", "العدد الكلي للحيوانات المنوية", "نسبة الحيوية", "درجة حموضة السائل المنوي"]
+    },
+    {
+      "q": "To confirm ovulation in a woman with a regular 28-day menstrual cycle, serum progesterone is measured on day 21 or 22. Which value is diagnostic of normal ovulation?",
+      "o": ["Less than 3 ng/ml", "Greater than or equal to 10 ng/ml", "Between 2 and 5 ng/ml", "Strictly 1.5 ng/ml", "Greater than 0.5 ng/ml"],
+      "a": 1,
+      "trQ": "لتأكيد حدوث التبويض لدى سيدة ذات دورة شهرية منتظمة مدتها 28 يوماً، يتم قياس البروجستيرون في المصل في اليوم 21 أو 22. أي قيمة تُعد تشخيصية للتبويض الطبيعي؟",
+      "trO": ["أقل من 3 نانوغرام/مل", "أكبر من أو يساوي 10 نانوغرام/مل", "بين 2 و 5 نانوغرام/مل", "1.5 نانوغرام/مل بالضبط", "أكبر من 0.5 نانوغرام/مل"]
+    },
+    {
+      "q": "Which diagnostic procedure utilizes saline infusion during ultrasonography to evaluate tubal patency?",
+      "o": ["Hysterosalpingography", "Folliculometry", "Sonohysterography", "Diagnostic laparoscopy", "Hysteroscopy"],
+      "a": 2,
+      "trQ": "أي إجراء تشخيصي يستخدم ضخ المحلول الملحي أثناء التصوير بالموجات فوق الصوتية لتقييم سالكية الأنابيب؟",
+      "trO": ["تصوير الرحم والأنابيب بالصبغة", "متابعة التبويض بالسونار", "تصوير الرحم المائي بالسونار", "منظار البطن التشخيصي", "منظار الرحم"]
+    },
+    {
+      "q": "A 27-year-old woman undergoes serial transvaginal ultrasounds to monitor the maturation and rupture of the Graafian follicle. What is this specific investigation called?",
+      "o": ["Sonohysterography", "Hysterosalpingography", "Hormonal assay", "Folliculometry", "Laparoscopy"],
+      "a": 3,
+      "trQ": "تخضع سيدة تبلغ من العمر 27 عاماً لفحوصات سونار مهبلي متتالية لمتابعة نضج وانفجار حويصلة جراف. ماذا يُسمى هذا الفحص المحدد؟",
+      "trO": ["تصوير الرحم المائي بالسونار", "أشعة الصبغة على الرحم", "التحليل الهرموني", "متابعة التبويض", "منظار البطن"]
+    },
+    {
+      "q": "When evaluating sperm motility under the microscope, how is 'Grade b' motility differentiated from 'Grade a' motility?",
+      "o": ["Grade b moves forward in a curved or non-linear line, whereas Grade a moves in a straight line", "Grade b shows complete immotility, whereas Grade a shows sluggish movement", "Grade b moves in a straight line, whereas Grade a moves in circles", "Grade b indicates dead spermatozoa, whereas Grade a indicates live forms", "Grade b moves backward, whereas Grade a remains stationary"],
+      "a": 0,
+      "trQ": "عند تقييم حركة الحيوانات المنوية تحت المجهر، كيف يتم التمييز بين الحركة من الدرجة الثانية والحركة من الدرجة الأولى؟",
+      "trO": ["الدرجة الثانية تتحرك للأمام في خط منحني أو غير مستقيم، بينما الدرجة الأولى تتحرك في خط مستقيم", "الدرجة الثانية تُظهر انعداماً تاماً للحركة، بينما الدرجة الأولى تُظهر حركة بطيئة", "الدرجة الثانية تتحرك في خط مستقيم، بينما الدرجة الأولى تتحرك في دوائر", "الدرجة الثانية تشير لحيوانات منوية ميتة، بينما الدرجة الأولى تشير لأشكال حية", "الدرجة الثانية تتحرك للخلف، بينما الدرجة الأولى تبقى ثابتة"]
+    },
+    {
+      "q": "A 30-year-old female is diagnosed with infertility secondary to intrauterine synechiae (Asherman syndrome). What is the targeted surgical management for her condition?",
+      "o": ["Abdominal myomectomy", "Hysteroscopic guided adhesiolysis", "Tubal ligation", "Ovulatory induction drugs", "Saline infusion sonography"],
+      "a": 1,
+      "trQ": "شُخصت سيدة تبلغ من العمر 30 عاماً بالعقم الثانوي نتيجة التصاقات داخل الرحم. ما هو التدخل الجراحي الموجه لحالتها؟",
+      "trO": ["استئصال الورم الليفي عن طريق البطن", "فك الالتصاقات الموجه بمنظار الرحم", "ربط الأنابيب", "أدوية تحفيز التبويض", "تصوير الرحم المائي بالسونار"]
+    },
+    {
+      "q": "A male patient presents with severe oligoasthenospermia that failed to improve with supportive measures and medications. Which assisted technique places washed sperms directly into the uterine cavity?",
+      "o": ["Testicular biopsy", "In Vitro Fertilization (IVF)", "Intra-Uterine Insemination (IUI)", "Intra-Cytoplasmic Sperm Injection (ICSI)", "Laparoscopic drilling"],
+      "a": 2,
+      "trQ": "يعاني مريض من نقص شديد في عدد وحركة الحيوانات المنوية ولم يتحسن بالعلاج الدوائي والداعم. أي تقنية مساعدة تعتمد على وضع الحيوانات المنوية المغسولة مباشرة داخل تجويف الرحم؟",
+      "trO": ["خزعة الخصية", "أطفال الأنابيب", "التلقيح الصناعي داخل الرحم", "الحقن المجهري", "تثقيب المبيض بالمنظار"]
+    },
+    {
+      "q": "What percentage of infertile couples fall into the category of 'unexplained infertility', where no definitive cause is identified after full investigation of both partners?",
+      "o": ["25%", "50%", "2%", "10%", "35%"],
+      "a": 3,
+      "trQ": "ما هي النسبة المئوية للأزواج الذين يندرجون تحت فئة العقم غير المفسر، حيث لا يتم تحديد سبب قاطع بعد الفحص الكامل لكلا الشريكين؟",
+      "trO": ["25%", "50%", "2%", "10%", "35%"]
+    },
+    {
+      "q": "Which Assisted Reproductive Technology (ART) procedure specifically involves injecting a single sperm directly into the cytoplasm of an oocyte?",
+      "o": ["Intra-Uterine Insemination (IUI)", "Hysterosalpingography (HSG)", "Sonohysterography", "Controlled ovarian hyperstimulation", "Intra-Cytoplasmic Sperm Injection (ICSI)"],
+      "a": 4,
+      "trQ": "أي إجراء من تقنيات الإخصاب المساعد يتضمن تحديداً حقن حيوان منوي واحد مباشرة في سيتوبلازم البويضة؟",
+      "trO": ["التلقيح الصناعي داخل الرحم", "تصوير الرحم والأنابيب بالصبغة", "تصوير الرحم المائي", "فرط تنشيط المبيض المحكوم", "الحقن المجهري"]
+    },
+    {
+      "q": "True or False: The worldwide incidence of infertility among married couples is estimated at 10% to 15%.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يُقدر معدل انتشار العقم عالمياً بين الأزواج المتزوجين بنسبة تتراوح بين 10% إلى 15%.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: A woman who previously had an ectopic pregnancy and is now unable to conceive is classified as having primary infertility.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: المرأة التي سبق لها الحمل خارج الرحم ولا تستطيع الإنجاب حالياً تُصنف على أنها تعاني من عقم أولي.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: According to WHO criteria, a normal semen analysis requires at least 32% progressive motility and 40% total motility.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: وفقاً لمعايير منظمة الصحة العالمية، يتطلب تحليل السائل المنوي الطبيعي ما لا يقل عن 32% حركة تقدمية و 40% حركة كلية.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Mid-luteal serum progesterone levels below 10 ng/ml on day 21 of a 28-day cycle are diagnostic of normal ovulation.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: مستويات البروجستيرون في منتصف المرحلة الأصفرية الأقل من 10 نانوغرام/مل في اليوم 21 من دورة مدتها 28 يوماً تُعد تشخيصية للتبويض الطبيعي.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Hysterosalpingography (HSG) is primarily utilized to evaluate tubal patency.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يُستخدم تصوير الرحم والأنابيب بالصبغة بشكل أساسي لتقييم سالكية قناتي فالوب.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Grade a sperm motility is characterized by non-linear movement in a curved line.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: تتميز حركة الحيوانات المنوية من الدرجة الأولى بحركة غير خطية في مسار منحني.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Myomectomy is the surgical treatment indicated for infertility caused by uterine fibroids.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: استئصال الورم الليفي هو العلاج الجراحي الموصى به للعقم الناتج عن الأورام الليفية الرحمية.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Testicular biopsy is indicated in cases of azoospermia when no spermatozoa are found in the ejaculate.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يُلجأ لخزعة الخصية في حالات انعدام النطاف عند عدم وجود حيوانات منوية في السائل المقذوف.",
+      "trO": ["صحيح", "خطأ"]
+    }
+  ],
+  "place8": [
+    {
+      "q": "A 38-year-old nulliparous woman is diagnosed with the most common benign tumor of the smooth muscles of the uterus. What is the most correct medical term for this pathology?",
+      "o": ["Fibromyoma", "Myoma", "Leiomyoma", "Endometrial polyp", "Adenomyosis"],
+      "a": 2,
+      "trQ": "سيدة لم تلد من قبل تبلغ من العمر 38 عاماً شُخّصت بأكثر الأورام الحميدة شيوعاً في العضلات الملساء للرحم. ما هو المصطلح الطبي الأصح لهذه الحالة المرضية؟",
+      "trO": ["ورم ليفي لحمي", "ورم عضلاتي", "ورم عضلي أملس", "بوليب بطانة الرحم", "تغدد رحمي"]
+    },
+    {
+      "q": "Regarding the epidemiological risk factors and characteristics of uterine fibroids, which of the following statements is accurate?",
+      "o": ["They are extremely common in postmenopausal women receiving no hormones", "They are more common in black races", "They typically arise de novo after menopause", "They are frequently seen before puberty", "They decrease in size during pregnancy"],
+      "a": 1,
+      "trQ": "فيما يتعلق بعوامل الخطر الوبائية والخصائص للأورام الليفية الرحمية، أي العبارات التالية دقيقة؟",
+      "trO": ["هي شائعة للغاية لدى النساء بعد سن اليأس اللاتي لا يتلقين هرمونات", "هي أكثر شيوعاً في العرق الأسود", "تنشأ عادة من جديد بعد سن اليأس", "تُرى بشكل متكرر قبل البلوغ", "تقل في الحجم أثناء الحمل"]
+    },
+    {
+      "q": "Why are uterine fibroids considered 'estrogen-dependent' tumors?",
+      "o": ["Because they shrink completely during active reproductive years", "Because they do not appear before puberty and increase in size during pregnancy", "Because they exclusively occur in estrogen-deficient females", "Because they are triggered by high progesterone alone", "Because they regress during the peak of the follicular phase"],
+      "a": 1,
+      "trQ": "لماذا تُعتبر الأورام الليفية الرحمية أوراماً 'تعتمد على الاستروجين'؟",
+      "trO": ["لأنها تنكمش تماماً خلال سنوات الإنجاب النشطة", "لأنها لا تظهر قبل البلوغ وتزداد في الحجم أثناء الحمل", "لأنها تحدث حصرياً في الإناث اللاتي يعانين من نقص الاستروجين", "لأنها تحفز بواسطة البروجستيرون العالي وحده", "لأنها تتراجع خلال ذروة المرحلة الحويصلية"]
+    },
+    {
+      "q": "A 40-year-old woman is found to have a uterine fibroid located completely beneath the peritoneal cavity lining. How is this anatomical site classified?",
+      "o": ["Interstitial", "Submucous", "Subserous", "Cervical polyp", "Intracavitary"],
+      "a": 2,
+      "trQ": "امرأة تبلغ من العمر 40 عاماً وجد لديها ورم ليفي رحمي يقع بالكامل تحت بطانة تجويف الغشاء البريتوني. كيف يُصنف هذا الموقع التشريحي؟",
+      "trO": ["داخل جدار الرحم", "تحت بطانة الرحم", "تحت الغشاء البريتوني", "بوليب عنق الرحم", "داخل التجويف"]
+    },
+    {
+      "q": "What is clinically recognized as the commonest symptom associated with uterine fibroids?",
+      "o": ["Menorrhagia", "Contact bleeding", "Postmenopausal bleeding", "Watery vaginal discharge", "Acute urinary retention"],
+      "a": 0,
+      "trQ": "ما هو العرض الأكثر شيوعاً المرتبط سريرياً بالأورام الليفية الرحمية؟",
+      "trO": ["غزارة الطمث", "نزيف التلامس", "نزيف ما بعد سن اليأس", "إفرازات مهبلية مائية", "احتباس بول حاد"]
+    },
+    {
+      "q": "A patient with a large intramural fibroid experiences heavy menstrual bleeding (menorrhagia). Which of the following mechanisms contributes to this symptom?",
+      "o": ["Decreased endometrial surface area", "Atrophy of the myometrium layers", "Increased vascularity and pelvic congestion", "Complete suppression of estrogen production", "Hypoestrogenic state"],
+      "a": 2,
+      "trQ": "مريضة تعاني من ورم ليفي عضلي كبير وتعاني من غزارة الطمث. أي من الميكانيزمات التالية يساهم في هذا العرض؟",
+      "trO": ["انخفاض مساحة سطح بطانة الرحم", "ضمور طبقات عضلة الرحم", "زيادة الأوعية الدموية واحتقان الحوض", "القمع الكامل لإنتاج الاستروجين", "حالة نقص الاستروجين"]
+    },
+    {
+      "q": "Why do sub-serous or cervical fibroids typically present WITHOUT menorrhagia?",
+      "o": ["Because they do not interfere with the endometrial cavity or myometrial contraction mechanisms affecting the inner lining", "Because they secrete high levels of progesterone", "Because they destroy the ovaries completely", "Because they cause immediate amenorrhea", "Because they are always malignant"],
+      "a": 0,
+      "trQ": "لماذا لا تسبب الأورام الليفية تحت المصلية أو في عنق الرحم غزارة الطمث عادةً؟",
+      "trO": ["لأنها لا تتداخل مع تجويف بطانة الرحم أو ميكانيزمات انقضاض عضلة الرحم المؤثرة على البطانة الداخلية", "لأنها تفرز مستويات عالية من البروجستيرون", "لأنها تدمر المبيضين بالكامل", "لأنها تسبب انقطاع الطمث الفوري", "لأنها خبيثة دائماً"]
+    },
+    {
+      "q": "A pregnant woman in her second trimester with a known uterine fibroid presents with severe acute abdominal pain and localized tenderness over the mass. What is the most likely serious degeneration occurring?",
+      "o": ["Hyaline degeneration", "Myxoid degeneration", "Red degeneration", "Cystic degeneration", "Calcific degeneration"],
+      "a": 2,
+      "trQ": "سيدة حاملاً في الثدي الثاني لديها ورم ليفي رحمي معروف، حضرت وهي تعاني من ألم بطني حاد ومفاجئ مع إيلام موضعي فوق الكتلة. ما هو التحلل الخطير الأكثر احتمالاً حدوثه؟",
+      "trO": ["تحلل هياليني", "تحلل مخاطي", "التحلل الأحمر", "تحلل كيسي", "تحلل تكلسي"]
+    },
+    {
+      "q": "Which of the following clinical indicators represents an absolute indication for surgical intervention (no conservative management) in an asymptomatic uterine fibroid?",
+      "o": ["Size equivalent to a 14-week pregnant uterus", "A small subserous fibroid", "A stationary interstitial fibroid in a 50-year-old", "An incidental tiny myoma found on routine ultrasound", "A single small intramural fibroid"],
+      "a": 0,
+      "trQ": "أي من المؤشرات السريرية التالية يمثل مؤشراً مطلقاً للتدخل الجراحي (وليس الإدارة التحفظية) في ورم ليفي رحمي عديم الأعراض؟",
+      "trO": ["حجم يعادل رحم حامل في الأسبوع الرابع عشر", "ورم ليفي صغير تحت المصلية", "ورم ليفي جداري مستقر في امرأة عمرها 50 عاماً", "ورم عضلي دقيق بالصدفة في السونار الروتيني", "ورم ليفي جداري صغيير واحد"]
+    },
+    {
+      "q": "Why is a pedunculated subserous myoma considered an indication for surgical removal even if asymptomatic?",
+      "o": ["Due to high risk of malignant transformation", "Because it is liable to torsion", "Because it causes immediate ureteric compression", "Because it guarantees severe menorrhagia", "Because it prevents ovulation completely"],
+      "a": 1,
+      "trQ": "لماذا يُعتبر الورم الليفي المعنّق تحت المصلية مؤشراً للإزالة الجراحية حتى لو كان بدون أعراض؟",
+      "ترO": ["بسبب الخطر العالي للتحول الخبيث", "لأنه عرضة للالتواء", "لأنه يسبب ضغطاً فورياً على الحالب", "لأنه يضمن حدوث غزارة طمث حادة", "لأنه يمنع التبويض تماماً"]
+    },
+    {
+      "q": "A submucous fibroid in a nulliparous woman is viewed with clinical concern primarily to avoid which major complication?",
+      "o": ["Infertility and abortion", "Ureteric obstruction", "Red degeneration", "Ovarian torsion", "Cervical carcinoma"],
+      "a": 0,
+      "trQ": "يُنظر إلى الورم الليفي تحت بطانة الرحم في امرأة لم تلد من قبل بقلق سريري أساسي لتجنب أي مضاعفة رئيسية؟",
+      "trO": ["العقم والإجهاض", "انسداد الحالب", "التحلل الأحمر", "التواء المبيض", "سرطان عنق الرحم"]
+    },
+    {
+      "q": "When a large interstitial cervical fibroid is diagnosed, what critical anatomical structure is at immediate risk of compression requiring careful management?",
+      "o": ["The urethra", "The ureter", "The descending aorta", "The inferior vena cava", "The femoral nerve"],
+      "a": 1,
+      "trQ": "عند تشخيص ورم ليفي جداري عنقي كبير، ما هو التركيب التشريحي الحرج المعرض لخطر الضغط الفوري ويتطلب إدارة حذرة؟",
+      "trO": ["الإحليل (مجرى البول)", "الحالب", "الشريان الأورطي النازل", "الوريد الاجوف السفلي", "العصب الفخذي"]
+    },
+    {
+      "q": "Which surgical modality involves the destruction of fibroid tissue using electrical current?",
+      "o": ["Myomectomy", "Hysterectomy", "Myolysis", "Uterine artery embolization", "Hysteroscopic adhesiolysis"],
+      "a": 2,
+      "trQ": "أي وسيلة جراحية تتضمن تدمير نسيج الورم الليفي باستخدام التيار الكهربائي؟",
+      "trO": ["استئصال الورم", "استئصال الرحم", "تحلل العضلات بالتيار الكهربائي", "إغلاق الشريان الرحمي", "فك الالتصاقات بمنظار الرحم"]
+    },
+    {
+      "q": "What is the primary objective of 'Uterine Artery Embolization' (UAE) in fibroid management?",
+      "o": ["To completely remove the ovaries", "To block blood supply and shrink the fibroid", "To scrape the endometrial lining", "To remove cervical polyps", "To induce immediate menopause via hormones"],
+      "a": 1,
+      "trQ": "ما هو الهدف الأساسي من عملية 'إغلاق الشريان الرحمي' في إدارة الأورام الليفية؟",
+      "trO": ["إزالة المبيضين بالكامل", "قطع الإمداد الدموي وانكماش الورم الليفي", "كشط بطانة الرحم", "إزالة بوليبات عنق الرحم", "تحفيز سن اليأس الفوري عبر الهرمونات"]
+    },
+    {
+      "q": "A 43-year-old woman with multiple symptomatic uterine fibroids and completed family size requests a definitive surgical treatment that eliminates recurrence. Which procedure is most appropriate?",
+      "o": ["Myomectomy", "Myolysis", "Uterine artery embolization", "Hysterectomy", "Hormonal suppression therapy"],
+      "a": 3,
+      "trQ": "سيدة تبلغ من العمر 43 عاماً تعاني من أورام ليفية رحمية متعددة مصحوبة بأعراض وقد أكملت حجم عائلتها، وتطلب علاجاً جراحياً نهائياً يمنع التكرار. أي إجراء هو الأنسب؟",
+      "trO": ["استئصال الورم الليفي مع إبقاء الرحم", "تحلل العضلات", "إغلاق الشريان الرحمي", "استئصال الرحم", "علاج القمع الهرموني"]
+    },
+    {
+      "q": "Which of the following describes a myomectomy procedure?",
+      "o": ["Surgical removal of the entire uterus", "Surgical removal of the fibroid while preserving the uterus", "Embolization of the main uterine vessels", "Destruction of fibroid via high-intensity ultrasound", "Scandent removal of the cervix only"],
+      "a": 1,
+      "trQ": "أي مما يلي يصف إجراء عملية استئصال الورم الليفي (Myomectomy)؟",
+      "trO": ["الإزالة الجراحية للرحم بالكامل", "الإزالة الجراحية للورم الليفي مع الحفاظ على الرحم", "إغلاق الأوعية الرحمية الرئيسية", "تدمير الورم الليفي عبر الموجات فوق الصوتية عالية الكثافة", "إزالة عنق الرحم فقط"]
+    },
+    {
+      "q": "When evaluating factors affecting treatment choices for uterine fibroids, which clinical parameters are considered?",
+      "o": ["Patient shoe size and blood type", "Severity of symptoms, age, parity, size and site of myomas, and associated pregnancy or malignancy", "Strictly the patient's geographic location", "Only the presence of seasonal allergies", "Only the cost of hospital admission"],
+      "a": 1,
+      "trQ": "عند تقييم العوامل المؤثرة في خيارات العلاج للأورام الليفية الرحمية، ما هي المعايير السريرية التي يتم أخذها في الاعتبار؟",
+      "trO": ["مقاس حذاء المريضة فصيلة الدم", "شدة الأعراض، السن، عدد الولادات، حجم ومكان الأورام، ووجود حمل أو أورام خبيثة مصاحبة", "الموقع الجغرافي للمريضة حصرياً", "فقط وجود الحساسية الموسمية", "فقط تكلفة دخول المستشفى"]
+    },
+    {
+      "q": "True or False: Uterine fibroids are benign tumors originating from the smooth muscles of the uterus.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: الأورام الليفية الرحمية هي أورام حميدة تنشأ من العضلات الملساء للرحم.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Fibroids are commonly found and prevalent in black races.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: الأورام الليفية شائعة الانتشار في العرق الأسود.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Uterine fibroids frequently appear and originate de novo prior to the onset of puberty.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: تظهر الأورام الليفية الرحمية وتنشأ غالباً من جديد قبل بدء فترة البلوغ.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Menorrhagia is considered the commonest symptom of uterine fibroids.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: تُعتبر غزارة الطمث العرض الأكثر شيوعاً للأورام الليفية الرحمية.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Sub-serous and cervical fibroids typically present with severe menorrhagia.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: عادة ما تظهر الأورام الليفية تحت المصلية وعنق الرحم مصحوبة بغزارة طمث حادة.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Red degeneration is a serious complication that can occur during pregnancy with uterine fibroids, causing acute abdominal pain.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: التحلل الأحمر هو مضاعفة خطيرة يمكن أن تحدث أثناء الحمل مع الأورام الليفية الرحمية، مما يسبب ألماً بطنياً حاداً.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: A rapidly growing myoma does not require active treatment because it rules out malignancy.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: الورم الليفي النامي بسرعة لا يتطلب علاجاً فعالاً لأنه ينفي الخبث تماماً.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Hysterectomy involves the complete surgical removal of the uterus.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يتضمن استئصال الرحم الإزالة الجراحية الكاملة للرحم.",
+      "trO": ["صحيح", "خطأ"]
+    }
+  ],
+  "place9": [
+    {
+      "q": "How is Pelvic Inflammatory Disease (PID) formally defined regarding the anatomical site of infection?",
+      "o": ["Infection restricted strictly to the lower vagina", "Upper genital tract infection above the cervix, including endometritis, salpingitis, oophoritis, and pelvic peritonitis", "Infection limited only to the external labia and vulva", "Primary urinary bladder infection spreading to the urethra", "Isolated infection of the myometrium muscle layers"],
+      "a": 1,
+      "trQ": "كيف يُعرف مرض التهاب الحوض رسمياً فيما يتعلق بالموقع التشريعي للعدوى؟",
+      "trO": ["عدوى محصورة بدقة في المهبل السفلي", "عدوى الجهاز التناسلي العلوي فوق عنق الرحم، وتشمل التهاب بطانة الرحم، التهاب البوق، التهاب المبيض، والتهاب البريتون الحوضي", "عدوى تقتصر فقط على الشفرين الخارجيين والفرج", "عدوى أولية في المثانة البولية تنتشر إلى الإحليل", "عدوى معزولة لطبقات عضلة الرحم"]
+    },
+    {
+      "q": "What is the primary mode of spread for microorganisms in acute Pelvic Inflammatory Disease?",
+      "o": ["Hematogenous spread directly from the pulmonary circulation", "Lymphatic drainage from the lower gastrointestinal tract", "Ascending spread of microorganisms from the vagina and endocervix", "Direct transabdominal penetration from the skin", "Retrograde transmission via the urinary system"],
+      "a": 2,
+      "trQ": "ما هي الطريقة الأساسية لانتشار الكائنات الحية الدقيقة في مرض التهاب الحوض الحاد؟",
+      "trO": ["الانتشار الدموي مباشرة من الدورة الرئوية", "النزح الليمفاوي من الجهاز الهضمي السفلي", "الانتشار الصاعد للكائنات الحية الدقيقة من المهبل وعنق الرحم", "الاختراق البطني المباشر من الجلد", "الانتشار العكسي عبر الجهاز البولي"]
+    },
+    {
+      "q": "What percentage of sexually active young females are typically affected by PID?",
+      "o": ["0.1% to 0.5%", "1% to 2%", "15% to 20%", "30% to 40%", "50% to 60%"],
+      "a": 1,
+      "trQ": "ما هي النسبة المئوية للإناث الشابات النشطات جنسياً اللاتي يتأثرن عادة بمرض التهاب الحوض؟",
+      "trO": ["0.1% إلى 0.5%", "1% إلى 2%", "15% إلى 20%", "30% إلى 40%", "50% إلى 60%"]
+    },
+    {
+      "q": "Regarding the etiology of PID, what characterizes the nature of the infection?",
+      "o": ["It is strictly a monomicrobial viral infection", "It is a polymicrobial infection", "It is exclusively caused by Gram-positive bacilli", "It is a non-infectious autoimmune condition", "It is caused entirely by fungal proliferation"],
+      "a": 1,
+      "trQ": "فيما يتعلق بمسببات مرض التهاب الحوض، ما الذي يُميز طبيعة العدوى؟",
+      "trO": ["هي عدوى فيروسية أحادية الميكروب حصرياً", "هي عدوى متعددة الميكروبات", "تسببها عصيات موجبة الجرام حصرياً", "هي حالة مناعة ذاتية غير معدية", "تنتج بالكامل عن تكاثر الفطريات"]
+    },
+    {
+      "q": "Approximately what proportion of PID cases occur after invasive gynecological procedures such as an endometrial biopsy or IUD insertion?",
+      "o": ["About 2%", "About 15%", "About 50%", "About 85%", "100%"],
+      "a": 1,
+      "trQ": "تقريباً ما هي نسبة حالات التهاب الحوض التي تحدث بعد إجراءات نسائية جراحية مثل أخذ عينة من بطانة الرحم أو تركيب اللولب؟",
+      "trO": ["حوالي 2%", "حوالي 15%", "حوالي 50%", "حوالي 85%", "100%"]
+    },
+    {
+      "q": "Which of the following organisms are specifically listed among the common causative agents of PID?",
+      "o": ["Neisseria gonorrhoea and Chlamydia trachomatis", "Treponema pallidum and Herpes simplex virus", "Human papillomavirus and Cytomegalovirus", "Candida albicans and Trichomonas vaginalis", "Streptococcus pneumoniae and Mycobacterium tuberculosis"],
+      "a": 0,
+      "trQ": "أي من الكائنات التالية مُدرج تحديداً ضمن المسببات الشائعة لمرض التهاب الحوض؟",
+      "trO": ["نيسيريا جونوريا وكلايديا تراكوماتيس", "تربونيما باليدوم وفيروس الهربس البسيط", "فيروس الورم الحليمي البشري والفيروس البخاري", "كانديدا ألببيكانز وتريكوموناس فاجيناليس", "ستريبتوكوكس بيومونيا ومايكوباكتيريوبر كلوسيس"]
+    },
+    {
+      "q": "A 22-year-old female with multiple sexual partners presents with lower abdominal pain. By what factor is her relative risk of developing PID increased compared to women with a single partner?",
+      "o": ["1-2 times increase", "4-6 times increase", "10-12 times increase", "20 times increase", "No change in risk"],
+      "a": 1,
+      "trQ": "أنثى تبلغ من العمر 22 عاماً ولديها شركاء جنسيون متعددون تعاني من ألم في أسفل البطن. بمعامل كم يزداد خطرها النسبي للإصابة بالتهاب الحوض مقارنة بالنساء اللاتي لديهن شريك واحد؟",
+      "trO": ["زيادة من 1 إلى 2 مرة", "زيادة من 4 إلى 6 مرات", "زيادة من 10 إلى 12 مرة", "زيادة 20 مرة", "لا توجد زيادة في الخطر"]
+    },
+    {
+      "q": "Which demographic group is identified as being at significant risk for PID, with nearly 70% of affected females falling into this category?",
+      "o": ["Females over 50 years of age", "Adolescents and females under 25 years of age", "Postmenopausal women receiving HRT", "Nulliparous women over 40", "Pregnant women in the third trimester"],
+      "a": 1,
+      "trQ": "أي فئة ديموغرافية يتم تحديدها على أنها معرضة لخطر كبير للإصابة بالتهاب الحوض، حيث تقع ما يقريب من 70% من الإناث المصابات في هذه الفئة؟",
+      "trO": ["الإناث فوق سن 50 عاماً", "المراهقات والإناث تحت سن 25 عاماً", "النساء بعد سن اليأس اللاتي يتلقين العلاج الهرموني التعوضي", "النساء غير اللواتي لم يلدن فوق سن 40", "النساء الحوامل في الثلث الثالث"]
+    },
+    {
+      "q": "Which contraceptive method is noted to be protective against PID by thickening cervical mucus?",
+      "o": ["Intrauterine device (IUD)", "Barrier methods like condoms and hormonal contraceptives", "Coitus interruptus", "Periodic rhythm method", "Diaphragm without spermicide"],
+      "a": 1,
+      "trQ": "ما هي وسيلة منع الحمل التي يُشار إلى أنها واقية ضد التهاب الحوض من خلال زيادة سماكة مخاط عنق الرحم؟",
+      "trO": ["اللولب الرحمي", "الوسائل الحاجزية مثل الواقي الذكري وموانع الحمل الهرمونية", "العزل", "طريقة التوقيع الدوري", "الحجاب المهبلي بدون مبيد الحيوانات المنوية"]
+    },
+    {
+      "q": "According to CDC diagnostic criteria for PID, what constitutes the 'Minimal criteria' that warrants empirical treatment if all signs are present in sexually active women?",
+      "o": ["Fever above 38.3°C and high ESR", "Lower abdominal tenderness, uterine/adnexal tenderness, and cervical motion tenderness", "Presence of mucopurulent discharge and WBCs on microscopy", "Histopathologic evidence of endometritis on biopsy", "Laparoscopic visualization of perihepatic adhesions"],
+      "a": 1,
+      "trQ": "وفقاً لمعايير مركز مكافحة الأمراض والوقاية منها لتشخيص التهاب الحوض، ما الذي يشكل 'الحد الأدنى من المعايير' التي تبرر العلاج التجريبي إذا كانت جميع العلامات موجودة لدى النساء النشطات جنسياً؟",
+      "trO": ["حمى فوق 38.3 درجة مئوية وارتفاع سرعة الترسيب", "ألم عند اللمس في أسفل البطن، ألم في الرحم/الملحقات، وألم عند تحريك عنق الرحم", "وجود إفرازات مخاطية صديدية خلايا دم بيضاء تحت المجهر", "دليل نسيجي على التهاب بطانة الرحم في الخزعة", "رؤية بالمنظار لالتصاقات حول الكبد"]
+    },
+    {
+      "q": "Which of the following findings is classified under 'Additional criteria' for diagnosing PID?",
+      "o": ["Cervical motion tenderness", "Uterine adnexal tenderness", "Oral temperature > 38.3°C", "Histopathologic evidence on endometrial biopsy", "Laparoscopic abnormalities consistent with PID"],
+      "a": 2,
+      "trQ": "أي من النتائج التالية يُصنف ضمن 'المعايير الإضافية' لتشخيص التهاب الحوض؟",
+      "trO": ["ألم تحريك عنق الرحم", "ألم ملحقات الرحم", "درجة حرارة الفم أعلى من 38.3 درجة مئوية", "دليل نسيجي على خزعة بطانة الرحم", "تشوهات بالمنظار متوافقة مع التهاب الحوض"]
+    },
+    {
+      "q": "What diagnostic investigations represent the 'Definitive criteria' for PID?",
+      "o": ["Elevated ESR and C-reactive protein", "Oral temperature greater than 38.3°C and vaginal discharge", "Histopathologic evidence of endometritis on endometrial biopsy or laparoscopic abnormalities", "Presence of white blood cells in vaginal secretions", "Positive testing for Gonorrhea only"],
+      "a": 2,
+      "trQ": "ما هي الفحوصات التشخيصية التي تمثل 'المعايير النهائية' لتهاب الحوض؟",
+      "trO": ["ارتفاع سرعة الترسيب وبروتين التفاعل C", "درجة حرارة الفم أكبر من 38.3 درجة مئوية وإفرازات مهبلية", "أدلة نسيجية على التهاب بطانة الرحم في عينة بطانة الرحم أو تشوهات بالمنظار البطني", "وجود خلايا دم بيضاء في الإفرازات المهبلية", "اختبار إيجابي للسيلام فقط"]
+    },
+    {
+      "q": "Why is immediate antibiotic treatment crucial upon making a presumptive diagnosis of PID?",
+      "o": ["To prevent long-term sequelae such as ectopic pregnancy and infertility", "To instantly eliminate the need for any future contraception", "To reverse chronic hypertension", "To prevent gestational diabetes mellitus", "To eliminate the need for partner notification"],
+      "a": 0,
+      "trQ": "لماذا يُعد العلاج الفوري بالمضادات الحيوية أمراً بالغ الأهمية بمجرد وضع تشخيص افتراضي لالتهاب الحوض؟",
+      "trO": ["لمنع العواقب طويلة الأجل مثل الحمل خارج الرحم والعقم", "للقضاء الفوري على الحاجة لأي وسيلة منع حمل مستقبلية", "لعلاج ارتفاع ضغط الدم المزمن", "لمنع سكر الحمل", "لإلغاء الحاجة لإخطار الشريك"]
+    },
+    {
+      "q": "What key component must be included in the management of acute PID alongside treating the female patient?",
+      "o": ["Surgical removal of both ovaries", "Immediate total abdominal hysterectomy", "Treatment of the male partner and education for the prevention of reinfection", "Mandatory long-term blood transfusion", "Radiation therapy of the pelvis"],
+      "a": 2,
+      "trQ": "ما هو العنصر الرئيسي الذي يجب تضمينه في علاج التهاب الحوض الحاد إلى جانب علاج المريضة الأنثى؟",
+      "trO": ["الإزالة الجراحية لكلا المبيضين", "استئصال الرحم البطني الكلي الفوري", "علاج الشريك الذكر والتعليم للوقاية من إعادة العدوى", "نقل الدم طويل الأمد الإلزامي", "العلاج الإشعاعي للحوض"]
+    },
+    {
+      "q": "Which supportive measures are recommended for a patient undergoing treatment for mild acute PID?",
+      "o": ["Rigorous high-intensity aerobic exercise", "Bed rest in Fowler's position, no intercourse, hydration, and analgesics", "Complete fluid restriction and high protein diet", "Prolonged standing position and weightlifting", "Immediate exposure to therapeutic hot baths"],
+      "a": 1,
+      "trQ": "ما هي التدابير الداعمة الموصى بها لمريضة تخضع لعلاج التهاب الحوض الحاد الخفيف؟",
+      "trO": ["تمارين هوائية مكثفة وصارمة", "الراحة في السرير في وضع فاولر، الامتناع عن الجماع، الترطيب، والمسكنات", "تقييد السوائل التام وغذاء غني بالبروتين", "وضع الوقوف المطول ورفع الأثقال", "التعرض الفوري للحمامات الساخنة العلاجية"]
+    },
+    {
+      "q": "When is surgical management (such as laparotomy or laparoscopy) indicated in the course of PID?",
+      "o": ["For routine initial screening of all asymptomatic women", "For patients with surgical emergencies and failed medical management", "As the primary first-line treatment replacing all antibiotics", "To permanently prevent ovulation", "To confirm normal uterine cavity shape before puberty"],
+      "a": 1,
+      "trQ": "متى يُشار إلى العلاج الجراحي (مثل فتح البطن أو منظار البطن) في مسار التهاب الحوض؟",
+      "trO": ["للفحص الروتيني الأولي لجميع النساء عديمات الأعراض", "للمرضى الذين يعانون من حالات طوارئ جراحية وفشل العلاج الطبي", "كعلاج أولي خط أول يحل محل جميع المضادات الحيوية", "منع التبويض بشكل دائم", "لتأكيد شكل تجويف الرحم الطبيعي قبل البلوغ"]
+    },
+    {
+      "q": "What is the primary purpose of performing a diagnostic laparoscopy in complicated or ambiguous PID cases?",
+      "o": ["To completely excise the fallopian tubes", "To help with diagnosis and take cultures for identifying causative organisms", "To perform an incidental appendectomy", "To measure intra-abdominal pressure directly", "To reverse previous tubal ligation"],
+      "a": 1,
+      "trQ": "ما هو الغرض الأساسي من إجراء منظار بطن تشخيصي في حالات التهاب الحوض المعقدة أو الغامضة؟",
+      "trO": ["استئصال قناتي فالوب بالكامل", "المساعدة في التشخيص وخذ عينات زرع لمعرفة الكائنات الحية المسببة", "إجراء عملية استئصال الزائدة الدودية بالصدفة", "قياس الضغط داخل البطن مباشرة", "عكس ربط الأنابيب السابق"]
+    },
+    {
+      "q": "Why is definitive surgery for PID (when required) typically delayed for 2-3 months?",
+      "o": ["To allow more resolution of infection and inflammation", "To wait for the patient to complete normal menopause", "To ensure the patient gains significant body weight", "Because insurance approvals take precisely 90 days", "To synchronize with seasonal allergy cycles"],
+      "a": 0,
+      "trQ": "لماذا يتم عادة تأخير الجراحة النهائية لالتهاب الحوض (عند الحاجة إليها) لمدة 2 إلى 3 أشهر؟",
+      "trO": ["ل السماح بمزيد من انحسار العدوى والالتهاب", "انتظار حتى تكمل المريضة سن اليأس الطبيعي", "لضمان اكتساب المريضة وزناً كبيراً في الجسم", "لان موافقات التأمين تستغرق 90 يوماً بالضبط", "للتزامن مع دورات الحساسية الموسمية"]
+    },
+    {
+      "q": "True or False: Pelvic Inflammatory Disease is defined as an infection of the upper genital tract above the cervix.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يُعرّف مرض التهاب الحوض بأنه عدوى في الجهاز التناسلي العلوي فوق عنق الرحم.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: About 85% of PID cases are sexually transmitted, while 15% occur after procedures like IUD insertion.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: حوالي 85% من حالات التهاب الحوض تنتقل جنسياً، بينما تحدث 15% بعد إجراءات مثل تركيب اللولب.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: The incidence of PID increases significantly with advancing age in postmenopausal women.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: يزداد معدل انتشار التهاب الحوض بشكل كبير مع تقدم العمر لدى النساء بعد سن اليأس.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Barrier methods like condoms and hormonal contraceptives provide a protective effect against PID.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: الوسائل الحاجزية مثل الواقي الذكري وموانع الحمل الهرمونية توفر تأثيراً وقائياً ضد التهاب الحوض.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Cervical motion tenderness is categorized under the CDC minimal criteria for diagnosing PID.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يُصنف ألم تحريك عنق الرحم ضمن معايير مركز مكافحة الأمراض والوقاية منها الدنيا لتشخيص التهاب الحوض.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Oral temperature above 38.3°C is considered one of the minimal diagnostic criteria for PID.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: درجة حرارة الفم فوق 38.3 درجة مئوية تُعتبر إحدى معايير التشخيص الدنيا لالتهاب الحوض.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Histopathologic evidence of endometritis on endometrial biopsy is a definitive diagnostic criterion for PID.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: الدليل النسيجي على التهاب بطانة الرحم في عينة بطانة الرحم هو معيار تشخيصي نهائي لالتهاب الحوض.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Treatment of the male sexual partner is unnecessary in the management of acute PID.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: علاج الشريك الجنسي الذكر غير ضروري في إدارة التهاب الحوض الحاد.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Fowler's position involves bed rest positioning recommended as supportive treatment for acute PID.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: وضعية فاولر تتضمن وضع الراحة في السرير الموصى به كعلاج داعم لالتهاب الحوض الحاد.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Laparotomy in PID management is exclusively used for routine outpatient screening.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: يُستخدم فتح البطن في إدارة التهاب الحوض حصرياً للفحص الروتيني للمرضى الخارجيين.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Cultures taken during laparoscopy help identify the causative microorganisms in PID.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: تساعد المزارع المأخوذة أثناء منظار البطن في تحديد الكائنات الحية الدقيقة المسببة في التهاب الحوض.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Early administration of appropriate antibiotics for PID is critical to prevent long-term sequelae such as infertility.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يُعد الإعطاء المبكر للمضادات الحيوية المناسبة لالتهاب الحوض أمراً بالغ الأهمية لمنع العواقب طويلة الأجل مثل العقم.",
+      "trO": ["صحيح", "خطأ"]
+    }
+  ],
+  "place10": [
+    {
+      "q": "How is contraception formally defined in clinical practice?",
+      "o": ["Permanent sterilization only", "Avoidance of pregnancy whether transient or permanent", "Temporary suppression of ovulation via hormones", "Surgical closure of fallopian tubes", "Prevention of sexually transmitted diseases exclusively"],
+      "a": 1,
+      "trQ": "كيف تُعرف موانع الحمل رسمياً في الممارسة السريرية؟",
+      "trO": ["التعقيم الدائم فقط", "تجنب الحمل سواء كان مؤقتاً أو دائماً", "القمع المؤقت للتبويض عبر الهرمونات", "الإغلاق الجراحي لقناتي فالوب", "الوقاية من الأمراض المنقولة جنسياً حصرياً"]
+    },
+    {
+      "q": "Which of the following criteria is considered a fundamental characteristic of the ideal contraceptive?",
+      "o": ["Requiring continuous medical supervision", "High cost and restricted availability", "Cheap, available, and easy to use with high efficacy and no failure rate", "Causing permanent sterility after single use", "Interfering directly with normal sexual intercourse"],
+      "a": 2,
+      "trQ": "أي من المعايير التالية يُعتبر خصائص أساسية لمانع الحمل المثالي؟",
+      "trO": ["تتطلب إشرافاً طبياً مستمراً", "تكلفة عالية وتوفر مقيد", "رخيص، متاح، وسهل الاستخدام مع كفاءة عالية ولا يوجد معدل فشل", "تسبب تعقماً دائماً بعد الاستخدام الفردي", "تتداخل مباشرة مع العلاقة الجنسية الطبيعية"]
+    },
+    {
+      "q": "Which method belongs to physiological contraception?",
+      "o": ["Combined oral contraceptive pills", "Intrauterine device (IUD)", "Lactation amenorrhoea method (LAM), safe period, and periodic abstinence", "Subdermal capsules", "Chemical spermicides"],
+      "a": 2,
+      "trQ": "أي طريقة تنتمي إلى موانع الحمل الفسيولوجية؟",
+      "trO": ["حبوب منع الحمل المركبة عن طريق الفم", "اللولب الرحمي", "طريقة انقطاع الطمث الإرضاعي، الفترات الآمنة، والامتناع الدوري", "الكبسولات تحت الجلد", "الموائع الكيميائية القاتلة للحيوانات المنوية"]
+    },
+    {
+      "q": "A breastfeeding mother asks about using the Lactation Amenorrhoea Method (LAM). To use LAM ideally, within what postpartum timeframe must it be applied?",
+      "o": ["First 6 months postpartum", "First 12 months postpartum", "After 2 years postpartum", "Only during the first 6 weeks", "Anytime after the first year"],
+      "a": 0,
+      "trQ": "أم ترضع طفلها تسأل عن استخدام طريقة انقطاع الطمث الإرضاعي. لاستخدام هذه الطريقة بشكل مثالي، ضمن أي إطار زمني بعد الولادة يجب تطبيقها؟",
+      "trO": ["أول 6 أشهر بعد الولادة", "أول 12 شهراً بعد الولادة", "بعد عامين من الولادة", "فقط خلال أول 6 أسابيع", "في أي وقت بعد السنة الأولى"]
+    },
+    {
+      "q": "What is the primary mechanism of action of Combined Oral Contraceptive Pills (COCs)?",
+      "o": ["Direct destruction of sperms in the vagina", "Suppression of ovulation by inhibition of FSH and LH", "Mechanical blockage of the cervical os", "Induction of immediate tubal spasm", "Destruction of the endometrial lining permanently"],
+      "a": 1,
+      "trQ": "ما هو آلية العمل الأساسية لحبوب منع الحمل المركبة عن طريق الفم؟",
+      "trO": ["التدمير المباشر للحيوانات المنوية في المهبل", "قمع التبويض عن طريق تثبيط الهرمون المحفز للحوصلة والهرمون الملوتن", "الانسداد الميكانيكي لفتح عنق الرحم", "حوث تشنج فوري في الأنابيب", "تدمير بطانة الرحم بشكل دائم"]
+    },
+    {
+      "q": "When initiating Combined Oral Contraceptives (COCs) in a non-breastfeeding postpartum woman, when should they ideally be delayed until?",
+      "o": ["Immediately after delivery", "6 weeks after childbirth", "6 months after childbirth", "1 year after childbirth", "2 weeks after childbirth"],
+      "a": 1,
+      "trQ": "عند بدء استخدام حبوب منع الحمل المركبة لدى امرأة في فترة ما بعد الولادة ولا ترضع، إلى متى يُفضل تأخيرها؟",
+      "trO": ["فوراً بعد الولادة", "6 أسابيع بعد الولادة", "6 أشهر بعد الولادة", "سنة بعد الولادة", "أسبوعين بعد الولادة"]
+    },
+    {
+      "q": "A breastfeeding woman requests COCs. For a lactating mother, postpartum use of COCs should be delayed until when, due to potential effects on milk supply?",
+      "o": ["2 weeks postpartum", "6 weeks postpartum", "6 months after childbirth or until breastfeeding is discontinued", "1 month postpartum", "They can be started immediately without restriction"],
+      "a": 2,
+      "trQ": "امرأة ترضع تطلب حبوب منع الحمل المركبة. بالنسبة للأم المرضعة، متى يجب تأخير استخدام هذه الحبوب بسبب تأثيرها المحتمل على إمداد الحليب؟",
+      "trO": ["أسبوعين بعد الولادة", "6 أسابيع بعد الولادة", "6 أشهر بعد الولادة أو حتى التوقف عن الرضاعة", "شهر واحد بعد الولادة", "يمكن بدء استخدامها فوراً بدون قيود"]
+    },
+    {
+      "q": "Which of the following is a recognized systemic side effect associated with Combined Oral Contraceptive Pills?",
+      "o": ["Hypotension and bradycardia", "Nausea, vomiting, dizziness, headache, mood changes, and weight gain", "Immediate permanent weight loss", "Permanent loss of vision", "Severe bone mineralization increase"],
+      "a": 1,
+      "trQ": "أي مما يلي يُعتبر عرضاً جانبياً جهازياً معترفاً به مرتبطاً بحبوب منع الحمل المركبة عن طريق الفم؟",
+      "trO": ["انخفاض ضغط الدم وبطء القلب", "الغثيان، القيء، الدوار، الصداع، تغيرات المزاج، وزيادة الوزن", "فقدان وزن دائم وفوري", "فقدان الرؤية الدائم", "زيادة حادة في معادن العظام"]
+    },
+    {
+      "q": "Progestin-only Pills (POPs) contain exclusively progestin and are ideally suited for which group of women?",
+      "o": ["Postpartum breastfeeding women", "Postmenopausal women", "Nulliparous teenagers seeking permanent sterilization", "Women with severe hypertension and stroke history", "Women requiring rapid emergency contraception within 24 hours"],
+      "a": 0,
+      "trQ": "تحتوي حبوب البروجستين وحدها على البروجستين حصرياً وهي مناسبة تماماً لأي مجموعة من النساء؟",
+      "trO": ["النساء المرضعات في فترة ما بعد الولادة", "النساء بعد سن اليأس", "المراهقات اللاتي لم يلدن ويسعيْن للتعقيم الدائم", "النساء المصابات بارتفاع ضغط الدم الشديد وسبق لهن الإصابة بسكتة دماغية", "النساء المحتاجات لموانع حمل طارئة خلال 24 ساعة"]
+    },
+    {
+      "q": "What is the primary local mechanism of action of Intrauterine Contraceptive Devices (IUDs)?",
+      "o": ["Induction of local sterile inflammatory reaction", "Total suppression of the anterior pituitary gland", "Permanent destruction of ovarian follicles", "Chemical neutralization of vaginal secretions", "Direct enzymatic breakdown of cervical mucus"],
+      "a": 0,
+      "trQ": "ما هي آلية العمل المحلية الأساسية لأجهزة منع الحمل داخل الرحم (اللولب)؟",
+      "trO": ["تحفيز تفاعل التهابي محقم محلي", "القمع التام للغدة النخامية الأمامية", "التدمير الدائم لحويصلات المبيض", "التعادل الكيميائي لإفرازات المهبل", "التحلل الإنزيمي المباشر لمخاط عنق الرحم"]
+    },
+    {
+      "q": "What is the standard duration of action for certain types of copper IUDs (e.g., CuT380)?",
+      "o": ["Up to 1 year", "Up to 3 years", "Up to 5 years", "Up to 10 years", "Up to 20 years"],
+      "a": 3,
+      "trQ": "ما هي مدة العمل القياسية لأنواع معينة من لولب النحاس؟",
+      "trO": ["تصل إلى سنة واحدة", "تصل إلى 3 سنوات", "تصل إلى 5 سنوات", "تصل إلى 10 سنوات", "تصل إلى 20 سنة"]
+    },
+    {
+      "q": "When is the optimal timing for inserting a standard IUD during the menstrual cycle?",
+      "o": ["During active heavy menses", "1-2 days after menses", "On day 14 of the cycle strictly", "During ovulation", "Immediately 7 days before menses"],
+      "a": 1,
+      "trQ": "ما هو التوقيت الأمثل لإدخال اللولب القياسي خلال الدورة الشهرية؟",
+      "trO": ["أثناء فترة الطمث الغزير النشط", "يوم أو يومين بعد انتهاء الطمث", "في اليوم الرابع عشر من الدورة حصرياً", "أثناء فترة التبويض", "فوراً قبل الطمث بـ 7 أيام"]
+    },
+    {
+      "q": "What is another clinical term used for surgical methods of contraception involving permanent inability to reproduce?",
+      "o": ["Temporary suppression", "Sterilization", "Barrier isolation", "Endometrial ablation", "Chemical suppression"],
+      "a": 1,
+      "trQ": "ما هو المصطلح السريري الآخر المستخدم للطرق الجراحية لمنع الحمل التي تتضمن عدم القدرة الدائمة على الإنجاب؟",
+      "trO": ["القمع المؤقت", "التعقيم (الإحصاء)", "العزل الحاجزي", "استئصال بطانة الرحم", "القمع الكيميائي"]
+    },
+    {
+      "q": "Which surgical method of female sterilization involves closing and cutting the fallopian tubes?",
+      "o": ["Vasectomy", "Tubal occlusion", "Hysterectomy", "Oophorectomy", "Myomectomy"],
+      "a": 1,
+      "trQ": "أي طريقة جراحية لتعقيم الإناث تتضمن إغلاق وقطع قناتي فالوب؟",
+      "trO": ["قطع القناة المنوية", "انسداد قناتي فالوب (ربط الأنابيب)", "استئصال الرحم", "استئصال المبيض", "استئصال الورم الليفي"]
+    },
+    {
+      "q": "What is a minor surgical procedure used for male permanent sterilization where the vasa deferentia are tied or cut?",
+      "o": ["Orchidectomy", "Vasectomy", "Prostatectomy", "Penile ligation", "Scrotectomy"],
+      "a": 1,
+      "trQ": "ما هو الإجراء الجراحي البسيط المستخدم للتعقيم الدائم للذكور حيث يتم ربط أو قطع الأسهر (الوعاء الناقل للحيوانات المنوية)؟",
+      "trO": ["استئصال الخصية", "قطع الوعاء الناقل (فازيكتومي)", "استئصال البروستاتا", "ربط القضيب", "استئصال كيس الصفن"]
+    },
+    {
+      "q": "Which of the following routes is NOT commonly used for female sterilization?",
+      "o": ["Laparoscopy", "Mini-laparotomy", "Vaginal route", "Intravenous route", "Hysteroscopic route"],
+      "a": 3,
+      "trQ": "أي من الطرق التالية لا تُستخدم عادة لتعقيم الإناث؟",
+      "trO": ["منظار البطن", "فتح البطن المصغر", "الطريق المهبلي", "الطريق الوريدي", "طريق منظار الرحم"]
+    },
+    {
+      "q": "A patient asks about the failure rate of female sterilization (tubal occlusion) when properly performed. What is its approximate efficacy rate?",
+      "o": ["50%", "85%", "95%", "99.5%", "100% strictly"],
+      "a": 3,
+      "trQ": "مريضة تسأل عن معدل فشل تعقيم الإناث عند إجرائه بشكل صحيح. ما هو معدل كفاءته التقريبي؟",
+      "trO": ["50%", "85%", "95%", "99.5%", "100% بشكل صارم"]
+    },
+    {
+      "q": "True or False: The ideal contraception method should be cheap, available, easy to use, and have no failure rate.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يجب أن يكون مانع الحمل المثالي رخيصاً، متاحاً، سهلاً للاستخدام، وليس له معدل فشل.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Lactational Amenorrhoea Method (LAM) requires exclusive and regular breastfeeding to be effective.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: تتطلب طريقة انقطاع الطمث الإرضاعي رضاعة طبيعية حصرية ومنتظمة لتكون فعالة.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Combined Oral Contraceptives (COCs) act primarily by causing immediate destruction of sperms inside the uterine cavity.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: تعمل حبوب منع الحمل المركبة في المقام الأول عن طريق التدمير الفوري للحيوانات المنوية داخل تجويف الرحم.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Progestin-only pills (POPs) require taking 1 pill each day ideally within 3 hours of the same time with no break between packs.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: تتطلب حبوب البروجستين وحدها تناول حبة واحدة كل يوم ويفضل خلال 3 ساعات من نفس الوقت بدون فترات راحة بين العبوات.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Intrauterine devices (IUDs) are associated with frequent systemic side effects affecting the liver and kidneys.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: ترتبط الأجهزة داخل الرحم بآثار جانبية جهازية متكررة تؤثر على الكبد والكلى.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Female sterilization (tubal occlusion) is considered a permanent method of contraception.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يُعتبر تعقيم الإناث طريقة دائمة لمنع الحمل.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: Vasectomy immediately renders a male sterile the exact second the procedure is completed.",
+      "o": ["True", "False"],
+      "a": 1,
+      "trQ": "صح أم خطأ: تجعل عملية قطع الوعاء الناقل الرجل عقيماً فوراً في نفس اللحظة التي تنتهي فيها العملية.",
+      "trO": ["صحيح", "خطأ"]
+    },
+    {
+      "q": "True or False: IUDs can be inserted immediately after vaginal delivery or during a cesarean section.",
+      "o": ["True", "False"],
+      "a": 0,
+      "trQ": "صح أم خطأ: يمكن تركيب اللولب فوراً بعد الولادة الطبيعية أو أثناء العملية القيصرية.",
+      "trO": ["صحيح", "خطأ"]
+    }
+  ],
+  "place11": [],
+  "place12": [],
+  "place13": [],
+  "place14": [],
+  "place15": [],
+  "place16": [],
+  "place17": [],
+  "place18": [],
+  "place19": [],
+  "place20": [],
+  "place21": [],
+  "place22": []
+}; 
+
+const STORAGE_PREFIX = "theCodingNurse_obgyn_";
+let quiz = []; 
+let answers = []; 
+let i=0, score=0;
+let currentMode = 'study'; 
+let currentDataset = 'place1'; 
+let timerInterval;
+let isReviewMode = false;
+let isComprehensiveExamMode = false;
+
+let soundEnabled = true;
+let vibrationEnabled = true;
+let autoAdvanceTimeout;
+let audioCtx = null; 
+
+const qDiv=document.getElementById("question"),
+      oDiv=document.getElementById("options"),
+      progress=document.getElementById("progressBar"),
+      midNav=document.getElementById("midNav"),
+      quizContainer=document.getElementById("quizContainer"),
+      startCard=document.getElementById("startCard"),
+      resultCard=document.getElementById("resultCard"),
+      scoreText=document.getElementById("scoreText");
+
+function getDatasetLabel(dataset) {
+    if (dataset === 'all') return "الامتحان الشامل";
+    const drawer = document.getElementById("datasetDrawer");
+    if(drawer) {
+        const selectedOption = drawer.querySelector(`option[value="${dataset}"]`);
+        if(selectedOption) return selectedOption.textContent;
+    }
+    return dataset;
+}
+
+function playAudioTone(type) {
+    if(!soundEnabled) return; 
+    try {
+        if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+        if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        oscillator.connect(gainNode); gainNode.connect(audioCtx.destination);
+        
+        if(type === 'correct') {
+            oscillator.frequency.setValueAtTime(523.25, audioCtx.currentTime); 
+            oscillator.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08); 
+            gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+            oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.25);
+        } else if(type === 'wrong') {
+            oscillator.type = 'sawtooth'; oscillator.frequency.setValueAtTime(140, audioCtx.currentTime);
+            gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime); gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+            oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.35);
+        } else if(type === 'click') {
+            oscillator.frequency.setValueAtTime(380, audioCtx.currentTime); gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.06);
+            oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.06);
+        }
+    } catch(e) {}
+}
+
+function triggerHaptic(type) {
+    if (!vibrationEnabled) return; 
+    if (navigator.vibrate) {
+        if (type === 'correct') navigator.vibrate(70);
+        else if (type === 'wrong') navigator.vibrate([100, 60, 100]);
+        else if (type === 'click') navigator.vibrate(35);
+    }
+}
+
+function toggleSound() {
+    soundEnabled = !soundEnabled;
+    document.getElementById("soundToggle").innerHTML = soundEnabled ? "<span>🔊</span> Sound On" : "<span>🔇</span> Sound Off";
+}
+
+function toggleVibration() {
+    vibrationEnabled = !vibrationEnabled;
+    document.getElementById("vibeToggle").innerHTML = vibrationEnabled ? "<span>📳</span> Vibe On" : "<span>📴</span> Vibe Off";
+}
+
+function setMode(mode) { currentMode = mode; showHighScore(); }
+function setDataset(dataset) { currentDataset = dataset; showHighScore(); }
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', targetTheme);
+  document.querySelector('.theme-toggle').innerHTML = targetTheme === 'dark' ? '<span>☀️</span> Light Mode' : '<span>🌓</span> Dark Mode';
+}
+
+function prepareQuizData(shouldShuffle) {
+    quiz.forEach(q => {
+        q.combinedOptions = q.o.map((enText, idx) => ({
+            en: enText,
+            ar: q.trO && q.trO[idx] ? q.trO[idx] : ""
+        }));
+    });
+    
+    if(shouldShuffle) {
+        for (let currentIdx = quiz.length - 1; currentIdx > 0; currentIdx--) {
+            const randomIdx = Math.floor(Math.random() * (currentIdx + 1));
+            [quiz[currentIdx], quiz[randomIdx]] = [quiz[randomIdx], quiz[currentIdx]];
+        }
+        quiz.forEach(q => {
+            for (let j = q.combinedOptions.length - 1; j > 0; j--) {
+                const r = Math.floor(Math.random() * (j + 1));
+                [q.combinedOptions[j], q.combinedOptions[r]] = [q.combinedOptions[r], q.combinedOptions[j]];
+            }
+        });
+    }
+}
+
+function startTimer() {
+    clearInterval(timerInterval);
+    let totalSeconds = isComprehensiveExamMode ? Math.min(3600, quiz.length * 36) : quiz.length * 30; 
+    const timerDisplay = document.getElementById("timerDisplay");
+    document.getElementById("timerBox").style.display = "block";
+    
+    function refreshTimerView() {
+        let mins = Math.floor(totalSeconds / 60);
+        let secs = totalSeconds % 60;
+        timerDisplay.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+    
+    refreshTimerView();
+    timerInterval = setInterval(() => {
+        totalSeconds--;
+        if(totalSeconds <= 0) { clearInterval(timerInterval); showResult(); } else { refreshTimerView(); }
+    }, 1000);
+}
+
+function getFlaggedTexts() { return JSON.parse(localStorage.getItem(STORAGE_PREFIX + "flagged_questions") || "[]"); }
+
+function speakQuestion() {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); 
+        let structuredText = `Question number ${i + 1}: ${quiz[i].q}. `;
+        quiz[i].combinedOptions.forEach((opObj, idx) => { structuredText += `Choice number ${idx + 1}: ${opObj.en}. `; });
+        const utterance = new SpeechSynthesisUtterance(structuredText);
+        utterance.lang = 'en-US'; utterance.rate = 0.88;
+        utterance.onstart = () => {
+            const stopBtn = document.getElementById("stopSpeakBtn");
+            stopBtn.style.display = "inline-block"; stopBtn.innerHTML = "⏸️";
+        };
+        const resetAudioUI = () => { document.getElementById("stopSpeakBtn").style.display = "none"; };
+        utterance.onend = resetAudioUI; utterance.onerror = resetAudioUI;
+        window.speechSynthesis.speak(utterance);
+    }
+}
+
+function toggleSpeechPause() {
+    if ('speechSynthesis' in window) {
+        const stopBtn = document.getElementById("stopSpeakBtn");
+        if (window.speechSynthesis.speaking) {
+            if (window.speechSynthesis.paused) { window.speechSynthesis.resume(); stopBtn.innerHTML = "⏸️"; } 
+            else { window.speechSynthesis.pause(); stopBtn.innerHTML = "▶️"; }
+        }
+    }
+}
+
+function forceStopSpeechEngine() {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const stopBtn = document.getElementById("stopSpeakBtn");
+        if (stopBtn) stopBtn.style.display = "none";
+    }
+}
+
+function toggleTranslation() {
+    const tBox = document.getElementById("translationBox");
+    tBox.style.display = (tBox.style.display === "block") ? "none" : "block";
+}
+
+function selectRootMode(rootMode) {
+    const mainMenu = document.getElementById("mainModeMenu");
+    const lecturesSetup = document.getElementById("lecturesSetupContainer");
+    
+    if (rootMode === 'lectures') {
+        mainMenu.style.display = "none";
+        lecturesSetup.style.display = "block";
+        isComprehensiveExamMode = false;
+        checkSavedProgress();
+        showHighScore();
+    } else if (rootMode === 'main') {
+        mainMenu.style.display = "flex";
+        lecturesSetup.style.display = "none";
+        isComprehensiveExamMode = false;
+    } else if (rootMode === 'comprehensive_exam') {
+        isComprehensiveExamMode = true;
+        currentMode = 'exam';
+        startComprehensiveExamSession();
+    }
+}
+
+function startComprehensiveExamSession() {
+    let allMergedQuestions = [];
+    
+    Object.keys(datasets).forEach(key => {
+        if (Array.isArray(datasets[key]) && datasets[key].length > 0) {
+            datasets[key].forEach(q => {
+                allMergedQuestions.push(JSON.parse(JSON.stringify(q)));
+            });
+        }
+    });
+
+    if (allMergedQuestions.length === 0) {
+        alert("لا توجد أسئلة متوفرة في المحاضرات الحالية! أضف بعض الأسئلة أولاً.");
+        selectRootMode('main');
+        return;
+    }
+
+    const targetExamCount = Math.min(100, allMergedQuestions.length);
+    let examPool = [];
+    try { examPool = JSON.parse(localStorage.getItem(STORAGE_PREFIX + "exam_pool") || "[]"); } catch (e) { examPool = []; }
+
+    const validQuestionTexts = new Set(allMergedQuestions.map(q => q.q));
+    examPool = Array.isArray(examPool) ? examPool.filter(q => validQuestionTexts.has(q.q)) : [];
+
+    const savedTotalCount = parseInt(localStorage.getItem(STORAGE_PREFIX + "exam_pool_total") || "0", 10);
+    if (savedTotalCount !== allMergedQuestions.length || examPool.length < targetExamCount) {
+        examPool = [...allMergedQuestions];
+        for (let idx = examPool.length - 1; idx > 0; idx--) {
+            const randomIdx = Math.floor(Math.random() * (idx + 1));
+            [examPool[idx], examPool[randomIdx]] = [examPool[randomIdx], examPool[idx]];
+        }
+        localStorage.setItem(STORAGE_PREFIX + "exam_pool_total", String(allMergedQuestions.length));
+    }
+
+    quiz = examPool.slice(0, targetExamCount);
+    let remainingPool = examPool.slice(targetExamCount);
+    localStorage.setItem(STORAGE_PREFIX + "exam_pool", JSON.stringify(remainingPool));
+
+    quiz.forEach(q => {
+        q.combinedOptions = q.o.map((enText, idx) => ({
+            en: enText,
+            ar: q.trO && q.trO[idx] ? q.trO[idx] : ""
+        }));
+        for (let j = q.combinedOptions.length - 1; j > 0; j--) {
+            const r = Math.floor(Math.random() * (j + 1));
+            [q.combinedOptions[j], q.combinedOptions[r]] = [q.combinedOptions[r], q.combinedOptions[j]];
+        }
+    });
+
+    answers = new Array(quiz.length).fill(null);
+    i = 0; score = 0;
+    localStorage.removeItem(STORAGE_PREFIX + "quiz_progress");
+
+    midNav.innerHTML = "";
+    quiz.forEach((_, idx) => {
+      const b = document.createElement("button");
+      b.textContent = idx + 1; b.className = "q-btn";
+      b.onclick = () => { i = idx; load(); };
+      midNav.appendChild(b);
+    });
+
+    startCard.style.display = "none"; 
+    quizContainer.style.display = "block";
+    startTimer();
+    load();
+}
+
+function startQuiz() {
+    let selectedBank = [];
+
+    if (currentDataset === 'all') {
+        Object.keys(datasets).forEach(key => {
+            if (Array.isArray(datasets[key]) && datasets[key].length > 0) {
+                selectedBank = selectedBank.concat(datasets[key]);
+            }
+        });
+        selectedBank = JSON.parse(JSON.stringify(selectedBank));
+    } else {
+        selectedBank = JSON.parse(JSON.stringify(datasets[currentDataset] || []));
+    }
+
+    if(selectedBank.length === 0) {
+        alert("لا توجد أسئلة متوفرة في هذا القسم حالياً!");
+        return;
+    }
+
+    if (currentMode === 'bookmark') {
+        let flagged = getFlaggedTexts();
+        quiz = selectedBank.filter(q => flagged.includes(q.q));
+        if (quiz.length === 0) {
+            alert("❌ لا توجد أسئلة مميزة بـ 🔖 في هذا القسم!");
+            return;
+        }
+        prepareQuizData(false);
+        localStorage.removeItem(STORAGE_PREFIX + "quiz_progress");
+    } else if(!isReviewMode) {
+        quiz = selectedBank;
+        let doShuffle = (currentMode !== 'sequential' && currentMode !== 'memorize');
+        prepareQuizData(doShuffle); 
+        localStorage.removeItem(STORAGE_PREFIX + "quiz_progress"); 
+    }
+    answers = new Array(quiz.length).fill(null);
+    
+    midNav.innerHTML = "";
+    quiz.forEach((_, idx) => {
+      const b = document.createElement("button");
+      b.textContent = idx + 1; b.className = "q-btn";
+      b.onclick = () => { i = idx; load(); };
+      midNav.appendChild(b);
+    });
+
+    startCard.style.display = "none"; quizContainer.style.display = "block";
+    if(currentMode === 'exam') { startTimer(); } else { document.getElementById("timerBox").style.display = "none"; }
+    load();
+}
+
+function updateMidNav(){
+  let flagged = getFlaggedTexts();
+  document.querySelectorAll(".q-btn").forEach((el,idx)=>{
+    el.classList.remove("active","correct","wrong","answered-exam","flagged");
+    if(idx===i) el.classList.add("active");
+    if(quiz[idx] && flagged.includes(quiz[idx].q)) el.classList.add("flagged");
+    
+    if(quiz[idx] && quiz[idx].userPick !== undefined) {
+        if(isComprehensiveExamMode || currentMode === 'exam') { 
+            el.classList.add("answered-exam"); 
+        } else if(currentMode === 'study' || currentMode === 'sequential' || currentMode === 'bookmark' || currentMode === 'memorize') {
+            if(answers[idx]===true) el.classList.add("correct");
+            if(answers[idx]===false) el.classList.add("wrong");
+        }
+    }
+  });
+}
+
+function toggleFlag() {
+    if(quiz[i]) {
+        let flagged = getFlaggedTexts();
+        const qText = quiz[i].q;
+        if(flagged.includes(qText)) {
+            flagged = flagged.filter(t => t !== qText); quiz[i].isFlagged = false;
+        } else {
+            flagged.push(qText); quiz[i].isFlagged = true;
+        }
+        localStorage.setItem(STORAGE_PREFIX + "flagged_questions", JSON.stringify(flagged));
+        document.getElementById("flagBtn").classList.toggle("active", quiz[i].isFlagged);
+        updateMidNav(); saveProgress();
+    }
+}
+
+function load(){
+  if(quiz.length === 0) return;
+  clearTimeout(autoAdvanceTimeout); forceStopSpeechEngine(); 
+  document.getElementById("translationBox").style.display = "none";
+
+  const qCard = document.getElementById("quizCard");
+  qCard.style.animation = 'none'; qCard.offsetHeight; 
+  qCard.style.animation = 'popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+  let qText = quiz[i].q;
+  if (currentMode === 'memorize' && quiz[i].kw) {
+      const safeKw = quiz[i].kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`(${safeKw})`, 'gi');
+      qText = qText.replace(regex, `<span class="kw-highlight">$1</span>`);
+  }
+  
+  qDiv.innerHTML = qText;
+  document.getElementById("qIndexBadge").textContent = `Q: ${i + 1} / ${quiz.length}`;
+  
+  const correctIdx = quiz[i].combinedOptions.findIndex(opt => opt.en === quiz[i].o[quiz[i].a]);
+  const transBtn = document.getElementById("translateBtn");
+  
+  if(quiz[i].trQ) {
+      transBtn.style.display = "inline-block";
+      document.getElementById("transQText").textContent = quiz[i].trQ;
+      const transOList = document.getElementById("transOList"); transOList.innerHTML = "";
+      quiz[i].combinedOptions.forEach(optObj => {
+          if(optObj.ar) { const li = document.createElement("li"); li.textContent = optObj.ar; transOList.appendChild(li); }
+      });
+  } else { transBtn.style.display = "none"; }
+  
+  let flagged = getFlaggedTexts();
+  quiz[i].isFlagged = flagged.includes(quiz[i].q);
+  document.getElementById("flagBtn").classList.toggle("active", !!quiz[i].isFlagged);
+  
+  oDiv.innerHTML=""; progress.style.width=((i+1)/quiz.length)*100+"%"; updateMidNav();
+  
+  quiz[i].combinedOptions.forEach((opObj,idx)=>{
+    const b = document.createElement("button"); b.textContent = opObj.en;
+    
+    if (currentMode === 'memorize' && quiz[i].userPick === undefined) {
+        if (idx === correctIdx) { b.classList.add("correct"); b.style.borderWidth = "3px"; } 
+        else { b.style.opacity = "0.4"; b.disabled = true; }
+    }
+    if(quiz[i].userPick !== undefined) {
+        b.disabled=true;
+        if(isComprehensiveExamMode) {
+            if(idx === quiz[i].userPick) b.classList.add("selected-exam");
+        } else if(currentMode === 'study' || currentMode === 'sequential' || currentMode === 'bookmark' || currentMode === 'memorize') {
+            if(idx===correctIdx) b.classList.add("correct");
+            else if(idx === quiz[i].userPick) b.classList.add("wrong");
+        } else { if(idx === quiz[i].userPick) b.classList.add("selected-exam"); }
+    }
+    b.onclick=()=>answer(idx,b); oDiv.appendChild(b);
+  });
+}
+
+function answer(idx,btn){
+  if(quiz[i].userPick !== undefined) return;
+  quiz[i].userPick = idx;
+  document.querySelectorAll(".options button").forEach(b=>b.disabled=true);
+  const correctIdx = quiz[i].combinedOptions.findIndex(opt => opt.en === quiz[i].o[quiz[i].a]);
+  
+  if(isComprehensiveExamMode) {
+      btn.classList.add("selected-exam"); playAudioTone('click'); triggerHaptic('click');
+      autoAdvanceTimeout = setTimeout(() => { nextQ(); }, 150);
+  } else if(currentMode === 'study' || currentMode === 'sequential' || currentMode === 'bookmark' || currentMode === 'memorize') {
+      if(idx===correctIdx){
+        btn.classList.add("correct"); answers[i]=true; score++;
+        playAudioTone('correct'); triggerHaptic('correct');
+        autoAdvanceTimeout = setTimeout(() => { nextQ(); }, 1200); 
+      }else{
+        btn.classList.add("wrong"); btn.classList.add("shake-anim"); 
+        oDiv.children[correctIdx].classList.add("correct"); answers[i]=false;
+        playAudioTone('wrong'); triggerHaptic('wrong');
+      }
+  } else { btn.classList.add("selected-exam"); playAudioTone('click'); triggerHaptic('click'); }
+  updateMidNav(); saveProgress();
+}
+
+function nextQ(){ if(i<quiz.length-1){i++;load()} else showResult(); }
+function prevQ(){ if(i>0){i--;load()} }
+
+function goToHome() {
+    clearInterval(timerInterval); forceStopSpeechEngine(); saveProgress(); 
+    quizContainer.style.display = "none"; startCard.style.display = "block";
+    isReviewMode = false;
+    
+    if(isComprehensiveExamMode) { selectRootMode('main'); } else { selectRootMode('lectures'); }
+}
+
+function saveProgress() {
+    if(isReviewMode || isComprehensiveExamMode) return; 
+    const dataToSave = { quiz: quiz, answers: answers, i: i, score: score, currentMode: currentMode, currentDataset: currentDataset };
+    localStorage.setItem(STORAGE_PREFIX + "quiz_progress", JSON.stringify(dataToSave));
+}
+
+function checkSavedProgress() {
+    if(localStorage.getItem(STORAGE_PREFIX + "quiz_progress") && !isComprehensiveExamMode) { document.getElementById("resumeBtn").style.display = "block"; } 
+    else { document.getElementById("resumeBtn").style.display = "none"; }
+}
+
+function showHighScore() {
+    let modeKey = isComprehensiveExamMode ? STORAGE_PREFIX + "high_score_comprehensive" : STORAGE_PREFIX + "high_score_" + currentDataset + "_" + currentMode;
+    let highScore = localStorage.getItem(modeKey);
+    const hsView = document.getElementById("highScoreView");
+    if(highScore !== null) {
+        let modeName = "";
+        if(isComprehensiveExamMode) modeName = "(الامتحان الشامل)";
+        else if(currentMode === 'sequential') modeName = "(الترتيب)";
+        else if(currentMode === 'study') modeName = "(المذاكرة)";
+        else if(currentMode === 'exam') modeName = "(الامتحان)";
+        else if(currentMode === 'bookmark') modeName = "(المميزة)";
+        else if(currentMode === 'memorize') modeName = "(البصمجة)";
+        
+        document.getElementById("highScoreVal").textContent = isComprehensiveExamMode ? highScore + "% " + modeName : highScore + "% " + modeName + " - " + getDatasetLabel(currentDataset);
+        hsView.style.display = "block";
+    } else { hsView.style.display = "none"; }
+}
+
+function resumeQuiz() {
+    const savedData = localStorage.getItem(STORAGE_PREFIX + "quiz_progress");
+    if(!savedData) return;
+    const parsedData = JSON.parse(savedData);
+    quiz = parsedData.quiz; answers = parsedData.answers; i = parsedData.i; score = parsedData.score; currentMode = parsedData.currentMode; currentDataset = parsedData.currentDataset || 'place1';
+    isComprehensiveExamMode = false;
+
+    document.querySelectorAll('input[name="quizMode"]').forEach(radio => { if(radio.value === currentMode) radio.checked = true; });
+    if(document.getElementById("datasetDrawer")) document.getElementById("datasetDrawer").value = currentDataset;
+    
+    midNav.innerHTML = "";
+    quiz.forEach((_, idx) => {
+      const b = document.createElement("button"); b.textContent = idx + 1; b.className = "q-btn";
+      b.onclick = () => { i = idx; load(); }; midNav.appendChild(b);
+    });
+    startCard.style.display = "none"; quizContainer.style.display = "block";
+    if(currentMode === 'exam') { startTimer(); } else { document.getElementById("timerBox").style.display = "none"; }
+    load();
+}
+
+function showResult(){
+  clearInterval(timerInterval); forceStopSpeechEngine();
+  localStorage.removeItem(STORAGE_PREFIX + "quiz_progress"); 
+  document.getElementById("timerBox").style.display = "none";
+  quizContainer.style.display="none"; resultCard.style.display="block";
+  
+  if(currentMode === 'exam' || isComprehensiveExamMode) {
+      score = 0;
+      quiz.forEach((q) => { 
+          const correctIdx = q.combinedOptions.findIndex(opt => opt.en === q.o[q.a]);
+          if(q.userPick === correctIdx) score++; 
+      });
+  }
+  const wrongCount = quiz.length - score;
+  const accuracyRatio = Math.round((score / quiz.length) * 100);
+  
+  if (!isReviewMode) {
+      let modeKey = isComprehensiveExamMode ? STORAGE_PREFIX + "high_score_comprehensive" : STORAGE_PREFIX + "high_score_" + currentDataset + "_" + currentMode;
+      let savedHighScore = parseInt(localStorage.getItem(modeKey)) || 0;
+      if(!isNaN(accuracyRatio) && accuracyRatio > savedHighScore) { localStorage.setItem(modeKey, accuracyRatio); }
+  }
+  
+  document.getElementById("statCorrect").textContent = score;
+  document.getElementById("statWrong").textContent = wrongCount;
+  document.getElementById("statRatio").textContent = isNaN(accuracyRatio) ? "0%" : accuracyRatio + "%";
+  scoreText.textContent=`${score} / ${quiz.length}`;
+  
+  const bTitle = document.getElementById("badgeTitle");
+  if(accuracyRatio >= 95) bTitle.textContent = "👑 Master of OBGyn Nursing";
+  else if(accuracyRatio >= 80) bTitle.textContent = "🧸 Maternity Care Hero";
+  else if(accuracyRatio >= 50) bTitle.textContent = "💡 Smart Nurse";
+  else bTitle.textContent = "💪 Keep Fighting, Future Nurse";
+  
+  document.getElementById("reviewBtn").style.display = wrongCount > 0 ? "inline-block" : "none";
+  if(score >= (quiz.length / 2) && quiz.length > 0) {
+    var duration = 3 * 1000; var end = Date.now() + duration;
+    (function frame() {
+      confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0, y: 0.7 } });
+      confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1, y: 0.7 } });
+      if (Date.now() < end) { requestAnimationFrame(frame); }
+    }());
+  }
+}
+
+function startReview() {
+    let wrongQuestions = quiz.filter(q => {
+        const correctIdx = q.combinedOptions.findIndex(opt => opt.en === q.o[q.a]);
+        return q.userPick !== correctIdx;
+    });
+    if(wrongQuestions.length === 0) return;
+    quiz = JSON.parse(JSON.stringify(wrongQuestions));
+    quiz.forEach(q => { delete q.userPick; delete q.isFlagged; }); 
+    isReviewMode = true; i = 0; score = 0; currentMode = 'study';
+    prepareQuizData(false); resultCard.style.display = "none"; startQuiz();
+}
+
+function downloadResultCard() {
+    const dBtn = document.getElementById("downloadBtn");
+    const containerActionButtons = document.querySelector(".result-actions-container");
+    dBtn.textContent = "⏳ Generating Image..."; dBtn.disabled = true;
+    containerActionButtons.style.display = "none"; 
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const bgColor = currentTheme === 'dark' ? '#0f172a' : '#f1f5f9';
+    
+    html2canvas(document.querySelector(".container"), {
+        backgroundColor: bgColor, scale: 2, useCORS: true, allowTaint: true,
+        onclone: (clonedDoc) => { clonedDoc.documentElement.setAttribute('data-theme', currentTheme); }
+    }).then(canvas => {
+        const downloadLink = document.createElement("a"); downloadLink.download = `TheCodingNurse_OBGyn_Score.png`;
+        downloadLink.href = canvas.toDataURL("image/png"); downloadLink.click();
+        containerActionButtons.style.display = "flex"; dBtn.textContent = "📸 تحميل النتيجة كصورة"; dBtn.disabled = false;
+    }).catch(err => {
+        containerActionButtons.style.display = "flex"; dBtn.textContent = "📸 تحميل النتيجة كصورة"; dBtn.disabled = false;
+    });
+}
+
+function restartQuiz(){
+  i=0; score=0; isReviewMode = false; clearInterval(timerInterval); forceStopSpeechEngine();
+  localStorage.removeItem(STORAGE_PREFIX + "quiz_progress");
+  document.getElementById("resumeBtn").style.display = "none";
+  resultCard.style.display="none"; startCard.style.display="block";
+  selectRootMode('main');
+}
+
+window.onload = function() { 
+    const drawer = document.getElementById("datasetDrawer");
+    if(drawer) { currentDataset = drawer.value || 'place1'; }
+    selectRootMode('main'); 
+};
+</script>
+</body>
+</html>
